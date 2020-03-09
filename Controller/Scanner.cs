@@ -28,17 +28,27 @@ namespace TinyCompiler.Controller
                         }
                         break;
                     case State.InSlash:
-                        //todo law space -> division token
-                        //else if '*' go to incomment
-                        //else error
+                        if(ch == '*')
+                            current_state = State.InComment;
+                        else
+                        {
+                            current_token.Type = TokenType.Division;
+                            current_state = State.Done;
+                        }
                         break;
                     case State.InComment:
-                        //if '*' go to ending comment 
-                        //else add to lexeme
+                        if(ch == '*')
+                            current_state = State.EndingComment;
                         break;
                     case State.EndingComment:
-                        //if '/' endcomment else if '*' stay here 
-                        //else go to incomment
+                        if(ch == '*')
+                            continue;
+                        else if(ch == '/')
+                        {
+                            current_state = State.Done;
+                        }
+                        else
+                            current_state = State.InComment;
                         break;
                     case State.Identifier:
                         current_token = getNumberToken();
@@ -103,7 +113,6 @@ namespace TinyCompiler.Controller
                 }
             }
    
-            //todo swich case/loop, set in it the type and lexeme
 
             current_token.Lexeme = lexeme;
             current_token.Type = type;
