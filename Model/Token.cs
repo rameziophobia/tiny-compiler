@@ -61,13 +61,15 @@ enum State
     InOR,
     InAnd,
     InNotEqual,
-    Number,
+    Int,
+    Float,
     String,
     Start,
     Done,
     InComment, 
     InSlash,
-    EndingComment
+    EndingComment,
+    Error
 }
 
 namespace TinyCompiler.Model

@@ -7,25 +7,27 @@ namespace TinyCompiler.Controller
     {
 
         Token current_token = new Token();
+        private Char SavedChar = null;
 
         public Token getToken()
         {
             string lexeme = "";
+            
             TokenType type = TokenType.EndOfFile;
             State current_state = State.Start;
             while (current_state != State.Done)
             {
-                char ch = getNextChar();
+                char ch;
+                if(SavedChar != null){
+                    ch = SavedChar;
+                    SavedChar = null;
+                }else
+                    ch = getNextChar();
                 switch (current_state)
                 {
                     case State.Start:
                         Boolean success;
-                        (current_state, success) = getNewState();
-                        if (!success)
-                        {
-                            current_token = getSingleToken();
-                            current_state = State.Done;
-                        }
+                        current_state = getNewState(ch);
                         break;
                     case State.InSlash:
                         if(ch == '*')
@@ -34,6 +36,7 @@ namespace TinyCompiler.Controller
                         {
                             current_token.Type = TokenType.Division;
                             current_state = State.Done;
+                            SavedChar = ch;
                         }
                         break;
                     case State.InComment:
@@ -51,12 +54,38 @@ namespace TinyCompiler.Controller
                             current_state = State.InComment;
                         break;
                     case State.Identifier:
-                        current_token = getNumberToken();
-                        current_state = State.Done;
+                        if(char.IsLetterOrDigit(ch))
+                        {
+                            lexeme += ch;
+                            continue;
+                        }
+                        else{
+                            current_state = State.Done;
+                            SavedChar = ch;
+                        }
                         break;
-                    case State.Number:
-                        current_token = getNumberToken();
-                        current_state = State.Done;
+                    case State.Int:
+                        if(char.IsDigit(ch))
+                        {
+                            lexeme+=ch;
+                        }
+                        else if(ch == '.')
+                        {
+                            lexeme+=ch;
+                            current_state = State.Float;
+                        }
+                        else{
+                            current_state = State.Done;
+                            SavedChar = ch;
+                        }
+                        break;
+                    case State.Float:
+                        if(Char.IsDigit(ch))
+                            continue;
+                        else{
+                            current_state = State.Done;
+                            SavedChar = ch;
+                        }
                         break;
                     case State.String:
                         current_token = getStringToken();
@@ -123,16 +152,6 @@ namespace TinyCompiler.Controller
             return current_token;
         }
 
-        private Token getNumberToken()
-        {
-            throw new NotImplementedException();
-        }
-
-        private Token getStringToken()
-        {
-            throw new NotImplementedException();
-        }
-
         private char getNextChar()
         {
             throw new NotImplementedException();
@@ -143,9 +162,48 @@ namespace TinyCompiler.Controller
             throw new NotImplementedException();
         }
 
-        private (State, Boolean) getNewState()
+        private State getNewState(Char c)
         {
-            throw new NotImplementedException();
+            State state = State.Error;
+            switch(c){
+                case '/':
+                    state = State.InSlash;
+                    break;
+                case '<':
+                    state = State.InNotEqual;
+                    break;
+                case '&':
+                    state = State.InAnd;
+                    break;
+                case '|':
+                    state = State.InOR;
+                    break;
+                case ':':
+                    state = State.Assignment;
+                    break;
+                case '"':
+                    state = State.String;
+                    break;
+                case default:
+                    if(Char.IsLetter(c))
+                        state = State.Identifier;
+                    else if(Char.IsDigit(c))
+                        state = State.Int;
+                    else if(c == ' ' || c == '\t' || c == '\n'){ //TODO check if it catches all white space conditions
+                        state = State.Start;
+                    }
+                    else
+                        foreach(string word in Token.SPECIAL_SYMBOLS.Keys)
+                        {
+                            if (c.Equals(word))
+                            {
+                                state = State.Done;
+                                current_token.Type = Token.SPECIAL_SYMBOLS[word];
+                            }
+                        }
+                    break;
+            }
+            return state;
         }
 
         private void setTypeIfReserved()
