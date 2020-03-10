@@ -8,12 +8,12 @@ namespace TinyCompiler.Controller
 
         Token current_token = new Token();
         private Char SavedChar = null;
+        private string lexeme;
 
         public Token getToken()
         {
-            string lexeme = "";
-            
-            TokenType type = TokenType.EndOfFile;
+            lexeme = "";
+            TokenType type = TokenType.EndOfFile; //TODO
             State current_state = State.Start;
             while (current_state != State.Done)
             {
@@ -81,15 +81,16 @@ namespace TinyCompiler.Controller
                         break;
                     case State.Float:
                         if(Char.IsDigit(ch))
-                            continue;
+                            lexeme+=ch;
                         else{
                             current_state = State.Done;
                             SavedChar = ch;
                         }
                         break;
                     case State.String:
-                        current_token = getStringToken();
-                        current_state = State.Done;
+                        if(ch == '"')
+                            current_state = State.Done;
+                        lexeme+= ch;
                         break;
 
                     case State.Assignment:
@@ -144,7 +145,6 @@ namespace TinyCompiler.Controller
    
 
             current_token.Lexeme = lexeme;
-            current_token.Type = type;
             if(current_token.Type == TokenType.Id)
             {
                 setTypeIfReserved();
@@ -153,11 +153,6 @@ namespace TinyCompiler.Controller
         }
 
         private char getNextChar()
-        {
-            throw new NotImplementedException();
-        }
-
-        private Token getSingleToken()
         {
             throw new NotImplementedException();
         }
@@ -203,6 +198,8 @@ namespace TinyCompiler.Controller
                         }
                     break;
             }
+            if(state != State.Error && state != State.Start)
+                lexeme+= c;
             return state;
         }
 
