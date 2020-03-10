@@ -61,11 +61,15 @@ enum State
     InOR,
     InAnd,
     InNotEqual,
-    Number,
+    Int,
+    Float,
     String,
     Start,
     Done,
-    InComment //todo lesa 7aba stateskaman
+    InComment, 
+    InSlash,
+    EndingComment,
+    Error
 }
 
 namespace TinyCompiler.Model
@@ -85,9 +89,9 @@ namespace TinyCompiler.Model
                 { "endl" , TokenType.EndLine}, 
                 { "read" , TokenType.Read}, 
                 { "write" , TokenType.Write},
-                { "write" , TokenType.String},
-                { "write" , TokenType.Integer},
-                { "write" , TokenType.Float}
+                { "string" , TokenType.String},
+                { "int" , TokenType.Integer},
+                { "float" , TokenType.Float}
             };
 
         public readonly static Dictionary<string, TokenType> SPECIAL_SYMBOLS = 
