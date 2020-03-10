@@ -7,26 +7,26 @@ namespace TinyCompiler.Controller
     {
 
         Token current_token = new Token();
-        private Char SavedChar = null;
+        private Char SavedChar = '\0';
         private string lexeme;
 
         public Token getToken()
         {
             lexeme = "";
-            TokenType type = TokenType.EndOfFile; //TODO
+            //todo TokenType type = TokenType.EndOfFile;
             State current_state = State.Start;
             while (current_state != State.Done)
             {
                 char ch;
-                if(SavedChar != null){
+                if(SavedChar != '\0')
+                {
                     ch = SavedChar;
-                    SavedChar = null;
+                    SavedChar = '\0';
                 }else
                     ch = getNextChar();
                 switch (current_state)
                 {
                     case State.Start:
-                        Boolean success;
                         current_state = getNewState(ch);
                         break;
                     case State.InSlash:
@@ -179,7 +179,7 @@ namespace TinyCompiler.Controller
                 case '"':
                     state = State.String;
                     break;
-                case default:
+                default:
                     if(Char.IsLetter(c))
                         state = State.Identifier;
                     else if(Char.IsDigit(c))
