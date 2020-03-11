@@ -51,7 +51,9 @@ enum TokenType
     BoolOR,
     BoolAnd,
     
-    Assign //todo
+    Assign, //todo
+    BraceLeft,
+    BraceRight
 }
 
 enum State
@@ -104,6 +106,8 @@ namespace TinyCompiler.Model
                 { "*", TokenType.Mult},
                 { "/", TokenType.Division},
                 { ",", TokenType.Comma},
+                { "{", TokenType.BraceLeft},
+                { "}", TokenType.BraceRight},
                 { "(", TokenType.BracketLeft},
                 { ")", TokenType.BracketRight},
                 { ";", TokenType.SemiColon},
