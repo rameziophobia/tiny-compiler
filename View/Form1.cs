@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TinyCompiler.Controller;
 
 namespace TinyCompiler
 {
@@ -26,9 +27,11 @@ namespace TinyCompiler
                 {
                     string fileText = File.ReadAllText(openFileDialog.FileName);
                     CodeText.Text = fileText;
+                    Scanner s = new Scanner(fileText);
                 }
             }
         }
+
         private void Exit_button_Click(object sender, EventArgs e)
         {
             Close();
