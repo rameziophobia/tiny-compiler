@@ -5,10 +5,11 @@ namespace TinyCompiler.Controller
 {
     class Scanner
     {
-
+        int count = 0;
         Token current_token = new Token();
         private Char SavedChar = '\0';
         private string lexeme;
+        private string fileText;
 
         public Token getToken()
         {
@@ -151,10 +152,17 @@ namespace TinyCompiler.Controller
             }
             return current_token;
         }
-
+        public Scanner(string fileText)
+        {
+            this.fileText = fileText;
+        }
         private char getNextChar()
         {
-            throw new NotImplementedException();
+            char thisChar; 
+            string str = fileText;
+            thisChar = str[count];
+            count++;
+            return thisChar;
         }
 
         private State getNewState(Char c)
