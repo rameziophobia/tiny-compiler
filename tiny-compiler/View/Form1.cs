@@ -55,7 +55,7 @@ namespace TinyCompiler
                 string tableText = "";
                 foreach (Token token in tokens)
                 {
-                    tableText += token.Lexeme + "\t\t" + token.Type.ToString();
+                    tableText += token.Lexeme + "\t\t" + token.Type.ToString() + "\n";
                 }
                 tableForm.SetTableText(tableText);
                 tableForm.Show();

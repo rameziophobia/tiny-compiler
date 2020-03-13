@@ -18,13 +18,18 @@ namespace TinyCompiler.Controller
             Token currentToken = getToken();
             while (currentToken.Type != TokenType.EndOfFile)
             {
-                tokens.Add(currentToken);
+                if(currentToken.Type != TokenType.Comment)
+                {
+                    tokens.Add(currentToken);
+                }
+                currentToken = getToken();
             }
             return tokens;
         }
 
         public Token getToken()
         {
+            current_token = new Token();
             lexeme = "";
             //todo TokenType type = TokenType.EndOfFile;
             State current_state = State.Start;
@@ -38,7 +43,6 @@ namespace TinyCompiler.Controller
                 }
                 else
                 {
-
                     char? temp = getNextChar();
                     if (temp is null)
                     {
@@ -73,11 +77,13 @@ namespace TinyCompiler.Controller
                         else if (ch == '/')
                         {
                             current_state = State.Done;
+                            current_token.Type = TokenType.Comment;
                         }
                         else
                             current_state = State.InComment;
                         break;
                     case State.Identifier:
+                        current_token.Type = TokenType.Id;
                         if (char.IsLetterOrDigit(ch))
                         {
                             lexeme += ch;
@@ -90,7 +96,8 @@ namespace TinyCompiler.Controller
                         }
                         break;
                     case State.Int:
-                        if (char.IsDigit(ch))
+                        current_token.Type = TokenType.Integer;
+                        if(char.IsDigit(ch))
                         {
                             lexeme += ch;
                         }
@@ -106,7 +113,8 @@ namespace TinyCompiler.Controller
                         }
                         break;
                     case State.Float:
-                        if (Char.IsDigit(ch))
+                        current_token.Type = TokenType.Float;
+                        if(Char.IsDigit(ch))
                             lexeme += ch;
                         else
                         {
@@ -115,15 +123,18 @@ namespace TinyCompiler.Controller
                         }
                         break;
                     case State.String:
-                        if (ch == '"')
+                        current_token.Type = TokenType.String;
+                        if(ch == '"')
                             current_state = State.Done;
                         lexeme += ch;
                         break;
 
                     case State.Assignment:
+                        current_token.Type = TokenType.Assign;
                         current_state = State.Done;
                         if (ch == '=')
                         {
+                            lexeme += ch;
                             current_token.Type = TokenType.Assign;
                         }
                         else
@@ -133,9 +144,11 @@ namespace TinyCompiler.Controller
                         break;
 
                     case State.InAnd:
+                        current_token.Type = TokenType.BoolAnd;
                         current_state = State.Done;
                         if (ch == '&')
                         {
+                            lexeme += ch;
                             current_token.Type = TokenType.BoolAnd;
                         }
                         else
@@ -148,18 +161,22 @@ namespace TinyCompiler.Controller
                         current_state = State.Done;
                         if (ch == '>')
                         {
+                            lexeme += ch;
                             current_token.Type = TokenType.IsNotEqual;
                         }
                         else
                         {
-                            //todo error
+                            current_token.Type = TokenType.LessThan;
+                            SavedChar = ch;
                         }
                         break;
 
                     case State.InOR:
+                        current_token.Type = TokenType.BoolOR;
                         current_state = State.Done;
                         if (ch == '|')
                         {
+                            lexeme += ch;
                             current_token.Type = TokenType.BoolOR;
                         }
                         else
@@ -226,7 +243,7 @@ namespace TinyCompiler.Controller
                     else
                         foreach (string word in Token.SPECIAL_SYMBOLS.Keys)
                         {
-                            if (c.Equals(word))
+                            if (c.ToString().Equals(word))
                             {
                                 state = State.Done;
                                 current_token.Type = Token.SPECIAL_SYMBOLS[word];

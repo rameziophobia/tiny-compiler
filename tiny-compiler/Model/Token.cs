@@ -53,7 +53,11 @@ enum TokenType
     
     Assign, //todo
     BraceLeft,
-    BraceRight
+    BraceRight,
+    Comment,
+    StringType,
+    IntegerType,
+    FloatType
 }
 
 enum State
@@ -91,9 +95,9 @@ namespace TinyCompiler.Model
                 { "endl" , TokenType.EndLine}, 
                 { "read" , TokenType.Read}, 
                 { "write" , TokenType.Write},
-                { "string" , TokenType.String},
-                { "int" , TokenType.Integer},
-                { "float" , TokenType.Float}
+                { "string" , TokenType.StringType},
+                { "int" , TokenType.IntegerType},
+                { "float" , TokenType.FloatType}
             };
 
         public readonly static Dictionary<string, TokenType> SPECIAL_SYMBOLS = 
