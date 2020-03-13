@@ -1,22 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using TinyCompiler.Controller;
+using TinyCompiler.Model;
+using TinyCompiler.View;
 
 namespace TinyCompiler
 {
     public partial class Form1 : Form
     {
+        TableForm tableForm;
+
         public Form1()
         {
             InitializeComponent();
+            tableForm = new TableForm();
         }
         private void OpenFile_button_Click(object sender, EventArgs e)
         {
@@ -42,15 +40,26 @@ namespace TinyCompiler
             CodeText.ReadOnly = false;
         }
 
-        private void openFileDialog_FileOk(object sender, CancelEventArgs e)
-        {
-
-        }
-
         private void Save_button_Click(object sender, EventArgs e)
         {
             //TODO: copy richTextBox1.Text into a temp file
             CodeText.ReadOnly = true;
+        }
+
+        private void TT_button_Click(object sender, EventArgs e)
+        {
+            if(CodeText.Text != "")
+            {
+                Scanner scanner = new Scanner(CodeText.Text);
+                var tokens =  scanner.getTokens();
+                string tableText = "";
+                foreach (Token token in tokens)
+                {
+                    tableText += token.Lexeme + "\t\t" + token.Type.ToString();
+                }
+                tableForm.SetTableText(tableText);
+                tableForm.Show();
+            }
         }
     }
 }
