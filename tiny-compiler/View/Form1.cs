@@ -38,6 +38,7 @@ namespace TinyCompiler
         private void Edit_button_Click(object sender, EventArgs e)
         {
             CodeText.ReadOnly = false;
+            panel2.Visible = true;
         }
 
         private void Save_button_Click(object sender, EventArgs e)
@@ -57,8 +58,10 @@ namespace TinyCompiler
                 {
                     tableText += token.Lexeme + "\t\t" + token.Type.ToString() + "\n";
                 }
-                tableForm.SetTableText(tableText);
-                tableForm.Show();
+                //tableForm.SetTableText(tableText);
+                //tableForm.Show();
+                panel2.Visible = false;
+                richTextBox1.Text = tableText;
             }
         }
     }
