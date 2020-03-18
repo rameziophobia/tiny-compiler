@@ -9,50 +9,50 @@ namespace TinyCompiler
 {
     public partial class Form1 : Form
     {
-        TableForm tableForm;
-
         public Form1()
         {
             InitializeComponent();
-            tableForm = new TableForm();
         }
         private void OpenFile_button_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
+            OpenFileDialog openFileDialog = OFD_Setup();
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 if (openFileDialog.OpenFile() != null)
                 {
                     string fileText = File.ReadAllText(openFileDialog.FileName);
                     CodeText.Text = fileText;
-                    Scanner s = new Scanner(fileText);
                 }
             }
         }
-
-        private void Exit_button_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
         private void Edit_button_Click(object sender, EventArgs e)
         {
             CodeText.ReadOnly = false;
-            panel2.Visible = true;
+            CodePanel.Visible = true;
+            CodeText.Focus();
         }
-
         private void Save_button_Click(object sender, EventArgs e)
         {
-            //TODO: copy richTextBox1.Text into a temp file
             CodeText.ReadOnly = true;
+            SaveFileDialog saveFileDialog = SFD_Setup();
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                using (StreamWriter streamWriter = new StreamWriter(saveFileDialog.OpenFile()))
+                {
+                    streamWriter.WriteLine(CodeText.Text);
+                }
+            }
         }
+        private void LA_button_Click(object sender, EventArgs e)
+        {
 
+        }
         private void TT_button_Click(object sender, EventArgs e)
         {
-            if(CodeText.Text != "")
+            if (CodeText.Text != "")
             {
                 Scanner scanner = new Scanner(CodeText.Text);
-                var tokens =  scanner.getTokens();
+                var tokens = scanner.getTokens();
                 string tableText = "";
                 foreach (Token token in tokens)
                 {
@@ -60,9 +60,27 @@ namespace TinyCompiler
                 }
                 //tableForm.SetTableText(tableText);
                 //tableForm.Show();
-                panel2.Visible = false;
-                richTextBox1.Text = tableText;
+                CodePanel.Visible = false;
+                TreeText.Text = tableText;
             }
+        }
+        OpenFileDialog OFD_Setup()
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "txt files (*.txt)|*.txt|tiny file (*.tny)|*.tny|All files (*.*)|*.*";
+            openFileDialog.FilterIndex = 2;
+            return openFileDialog;
+        }
+        SaveFileDialog SFD_Setup()
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "txt files(*.txt)| *.txt | tiny file(*.tny) | *.tny | All files(*.*) | *.* ";
+            saveFileDialog.FilterIndex = 2;
+            return saveFileDialog;
+        }
+        private void Exit_button_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }
