@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using TinyCompiler.Model;
 
@@ -11,22 +11,44 @@ namespace TinyCompiler.Controller
         private Char SavedChar = '\0';
         private string lexeme;
         private string fileText;
+        private int lineCount = 1;
+        private int indexInCurrentLine = 0;
 
         public List<Token> getTokens()
         {
             List<Token> tokens = new List<Token>();
-            Token currentToken = getToken();
+
+            Token currentToken = getSafeToken();
             while (currentToken.Type != TokenType.EndOfFile)
             {
-                if(currentToken.Type != TokenType.Comment)
-                {
-                    tokens.Add(currentToken);
-                }
-                currentToken = getToken();
+                tokens.Add(currentToken);
+                currentToken = getSafeToken();
             }
             return tokens;
         }
 
+        public Token getSafeToken ()
+        {
+            bool safe = false;
+            Token t = null;
+            while(!safe)
+            {
+                try
+                {
+                    t = getToken();
+                    if(t.Type != TokenType.Comment)
+                    {
+                        safe = true;
+                    }
+                }
+                catch(TokenizationException e)
+                {
+                    //todo print error e.message to screen
+                }
+            }
+
+            return t;
+        }
         public Token getToken()
         {
             current_token = new Token();
@@ -139,7 +161,8 @@ namespace TinyCompiler.Controller
                         }
                         else
                         {
-                            //todo error
+                            SavedChar = ch;
+                            throw new TokenizationException(lineCount, indexInCurrentLine, "=", ch.ToString());
                         }
                         break;
 
@@ -153,7 +176,8 @@ namespace TinyCompiler.Controller
                         }
                         else
                         {
-                            //todo error
+                            SavedChar = ch;
+                            throw new TokenizationException(lineCount, indexInCurrentLine, "&", ch.ToString());
                         }
                         break;
 
@@ -181,7 +205,8 @@ namespace TinyCompiler.Controller
                         }
                         else
                         {
-                            //todo error
+                            SavedChar = ch;
+                            throw new TokenizationException(lineCount, indexInCurrentLine, "|", ch.ToString());
                         }
                         break;
                 }
@@ -205,6 +230,7 @@ namespace TinyCompiler.Controller
                 return null;
             char thisChar = fileText[count];
             count++;
+            indexInCurrentLine++;
             return thisChar;
         }
 
@@ -237,8 +263,13 @@ namespace TinyCompiler.Controller
                     else if (Char.IsDigit(c))
                         state = State.Int;
                     else if (c == ' ' || c == '\t' || c == '\n')
-                    { //TODO check if it catches all white space conditions
+                    { 
                         state = State.Start;
+                        if(c == '\n')
+                        {
+                            lineCount++;
+                            indexInCurrentLine = 0;
+                        }
                     }
                     else
                         foreach (string word in Token.SPECIAL_SYMBOLS.Keys)
@@ -265,6 +296,13 @@ namespace TinyCompiler.Controller
                     current_token.Type = Token.RESERVED_WORDS[word];
                 }
             }
+        }
+    }
+    internal class TokenizationException : Exception
+    {
+        public TokenizationException (int lineCount, int indexInCurrentLine, string expected, string found)
+        : base($"syntax error in line {lineCount} at {indexInCurrentLine} found '{found}', expecting a '{expected}'")
+        {
         }
     }
 }
