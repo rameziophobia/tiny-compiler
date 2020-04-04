@@ -45,24 +45,30 @@ namespace TinyCompiler
         }
         private void LA_button_Click(object sender, EventArgs e)
         {
-
-        }
-        private void TT_button_Click(object sender, EventArgs e)
-        {
-            if (CodeText.Text != "")
+            if(CodeText.Text != "")
             {
                 Scanner scanner = new Scanner(CodeText.Text);
                 var tokens = scanner.getTokens();
                 string tableText = "";
-                foreach (Token token in tokens)
+                foreach(Token token in tokens)
                 {
-                    tableText += token.Lexeme + "\t\t" + token.Type.ToString() + "\n";
+                    tableText += token.Lexeme + "\t\t\t\t" + token.Type.ToString() + "\n";
                 }
                 //tableForm.SetTableText(tableText);
                 //tableForm.Show();
                 CodePanel.Visible = false;
                 TreeText.Text = tableText;
+
+                string errorString = "";
+                foreach(string error in scanner.Errors)
+                {
+                    errorString += error + "\n";
+                }
+                ErrorText.Text = errorString;
             }
+        }
+        private void TT_button_Click(object sender, EventArgs e)
+        {
         }
         OpenFileDialog OFD_Setup()
         {
