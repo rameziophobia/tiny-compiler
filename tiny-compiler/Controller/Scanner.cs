@@ -142,6 +142,12 @@ namespace TinyCompiler.Controller
                         current_token.Type = TokenType.Float;
                         if(Char.IsDigit(ch))
                             lexeme += ch;
+                        else if(lexeme.EndsWith("."))
+                        {
+                            current_state = State.Error;
+                            errorExpectedFound = new Tuple<string, string>("number", ch.ToString());
+                            SavedChar = ch;
+                        }
                         else
                         {
                             current_state = State.Done;
