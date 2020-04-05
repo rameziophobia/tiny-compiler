@@ -75,7 +75,8 @@ enum State
     InComment, 
     InSlash,
     EndingComment,
-    Error
+    Error,
+    intToFloat
 }
 
 namespace TinyCompiler.Model

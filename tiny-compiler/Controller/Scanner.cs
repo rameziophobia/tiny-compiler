@@ -130,7 +130,7 @@ namespace TinyCompiler.Controller
                         else if (ch == '.')
                         {
                             lexeme += ch;
-                            current_state = State.Float;
+                            current_state = State.intToFloat;
                         }
                         else
                         {
@@ -142,15 +142,21 @@ namespace TinyCompiler.Controller
                         current_token.Type = TokenType.Float;
                         if(Char.IsDigit(ch))
                             lexeme += ch;
-                        else if(lexeme.EndsWith("."))
-                        {
-                            current_state = State.Error;
-                            errorExpectedFound = new Tuple<string, string>("number", ch.ToString());
-                            SavedChar = ch;
-                        }
                         else
                         {
                             current_state = State.Done;
+                            SavedChar = ch;
+                        }
+                        break;
+                    case State.intToFloat:
+                        current_token.Type = TokenType.Float;
+                        current_state = State.Float;
+                        if(Char.IsDigit(ch))
+                            lexeme += ch;
+                        else
+                        {
+                            current_state = State.Error;
+                            errorExpectedFound = new Tuple<string, string>("number", ch.ToString());
                             SavedChar = ch;
                         }
                         break;

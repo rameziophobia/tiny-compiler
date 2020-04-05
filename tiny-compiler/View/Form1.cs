@@ -64,7 +64,14 @@ namespace TinyCompiler
                 {
                     errorString += error + "\n";
                 }
-                ErrorText.Text = errorString;
+                if(errorString.Length != 0)
+                {
+                    ErrorText.Text = errorString;
+                }
+                else
+                {
+                    ErrorText.Text = "All Clear!";
+                }
             }
         }
         private void TT_button_Click(object sender, EventArgs e)
