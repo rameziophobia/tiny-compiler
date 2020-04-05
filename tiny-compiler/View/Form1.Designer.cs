@@ -37,7 +37,6 @@
             this.Save_button = new System.Windows.Forms.Button();
             this.LA_button = new System.Windows.Forms.Button();
             this.TT_button = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
             this.Exit_button = new System.Windows.Forms.Button();
             this.SubContainer = new System.Windows.Forms.SplitContainer();
             this.TreePanel = new System.Windows.Forms.Panel();
@@ -96,7 +95,6 @@
             this.MainMenu.Controls.Add(this.Save_button);
             this.MainMenu.Controls.Add(this.LA_button);
             this.MainMenu.Controls.Add(this.TT_button);
-            this.MainMenu.Controls.Add(this.button6);
             this.MainMenu.Controls.Add(this.Exit_button);
             this.MainMenu.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainMenu.Location = new System.Drawing.Point(0, 0);
@@ -190,26 +188,10 @@
             this.TT_button.UseVisualStyleBackColor = false;
             this.TT_button.Click += new System.EventHandler(this.TT_button_Click);
             // 
-            // button6
-            // 
-            this.button6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.button6.BackColor = System.Drawing.Color.DarkKhaki;
-            this.button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.button6.FlatAppearance.BorderColor = System.Drawing.Color.Red;
-            this.button6.FlatAppearance.BorderSize = 0;
-            this.button6.Location = new System.Drawing.Point(8, 422);
-            this.button6.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(215, 78);
-            this.button6.TabIndex = 6;
-            this.button6.Text = "button6";
-            this.button6.UseVisualStyleBackColor = false;
-            // 
             // Exit_button
             // 
             this.Exit_button.BackColor = System.Drawing.Color.DarkKhaki;
-            this.Exit_button.Location = new System.Drawing.Point(8, 504);
+            this.Exit_button.Location = new System.Drawing.Point(8, 422);
             this.Exit_button.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Exit_button.Name = "Exit_button";
             this.Exit_button.Size = new System.Drawing.Size(69, 42);
@@ -260,6 +242,7 @@
             // 
             this.CodeText.BackColor = System.Drawing.Color.Black;
             this.CodeText.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CodeText.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CodeText.ForeColor = System.Drawing.Color.White;
             this.CodeText.Location = new System.Drawing.Point(0, 0);
             this.CodeText.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -284,11 +267,11 @@
             // 
             // ErrorText
             // 
-            this.ErrorText.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(180)))), ((int)(((byte)(209)))));
+            this.ErrorText.BackColor = System.Drawing.Color.Bisque;
             this.ErrorText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.ErrorText.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ErrorText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ErrorText.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(154)))), ((int)(((byte)(116)))));
+            this.ErrorText.ForeColor = System.Drawing.Color.Red;
             this.ErrorText.Location = new System.Drawing.Point(0, 0);
             this.ErrorText.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ErrorText.Name = "ErrorText";
@@ -336,7 +319,6 @@
         private System.Windows.Forms.Button Save_button;
         private System.Windows.Forms.Button LA_button;
         private System.Windows.Forms.Button TT_button;
-        private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button Exit_button;
         private System.Windows.Forms.RichTextBox ErrorText;
         private System.Windows.Forms.RichTextBox CodeText;
