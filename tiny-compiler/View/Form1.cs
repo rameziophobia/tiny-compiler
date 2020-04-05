@@ -47,7 +47,7 @@ namespace TinyCompiler
         {
             if(CodeText.Text != "")
             {
-                Scanner scanner = new Scanner(CodeText.Text);
+                Scanner scanner = new Scanner(CodeText.Text + " ");
                 var tokens = scanner.getTokens();
                 string tableText = "";
                 foreach(Token token in tokens)
