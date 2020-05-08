@@ -47,5 +47,15 @@ namespace TinyCompiler.Controller
         {
 
         }
+
+        private TreeNode stmt_sequence ()
+        {
+            return new TreeNode();
+        }
+        private TreeNode statement ()
+        {
+            return new TreeNode();
+        }
+
     }
 }
