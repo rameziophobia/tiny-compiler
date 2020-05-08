@@ -33,7 +33,6 @@
             this.MainContainer = new System.Windows.Forms.SplitContainer();
             this.MainMenu = new System.Windows.Forms.FlowLayoutPanel();
             this.OpenFile_button = new System.Windows.Forms.Button();
-            this.Edit_button = new System.Windows.Forms.Button();
             this.Save_button = new System.Windows.Forms.Button();
             this.LA_button = new System.Windows.Forms.Button();
             this.TT_button = new System.Windows.Forms.Button();
@@ -44,6 +43,7 @@
             this.CodeText = new System.Windows.Forms.RichTextBox();
             this.TreeText = new System.Windows.Forms.RichTextBox();
             this.ErrorText = new System.Windows.Forms.RichTextBox();
+            this.Edit_button = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.MainContainer)).BeginInit();
             this.MainContainer.Panel1.SuspendLayout();
             this.MainContainer.Panel2.SuspendLayout();
@@ -119,23 +119,6 @@
             this.OpenFile_button.Text = "&Open File";
             this.OpenFile_button.UseVisualStyleBackColor = false;
             this.OpenFile_button.Click += new System.EventHandler(this.OpenFile_button_Click);
-            // 
-            // Edit_button
-            // 
-            this.Edit_button.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Edit_button.BackColor = System.Drawing.Color.DarkKhaki;
-            this.Edit_button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.Edit_button.FlatAppearance.BorderColor = System.Drawing.Color.Red;
-            this.Edit_button.FlatAppearance.BorderSize = 0;
-            this.Edit_button.Location = new System.Drawing.Point(8, 94);
-            this.Edit_button.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Edit_button.Name = "Edit_button";
-            this.Edit_button.Size = new System.Drawing.Size(215, 78);
-            this.Edit_button.TabIndex = 2;
-            this.Edit_button.Text = "&Edit";
-            this.Edit_button.UseVisualStyleBackColor = false;
-            this.Edit_button.Click += new System.EventHandler(this.Edit_button_Click);
             // 
             // Save_button
             // 
@@ -240,6 +223,7 @@
             // 
             // CodeText
             // 
+            this.CodeText.AcceptsTab = true;
             this.CodeText.BackColor = System.Drawing.Color.Black;
             this.CodeText.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CodeText.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -247,7 +231,6 @@
             this.CodeText.Location = new System.Drawing.Point(0, 0);
             this.CodeText.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.CodeText.Name = "CodeText";
-            this.CodeText.ReadOnly = true;
             this.CodeText.Size = new System.Drawing.Size(589, 421);
             this.CodeText.TabIndex = 0;
             this.CodeText.TabStop = false;
@@ -280,6 +263,23 @@
             this.ErrorText.TabIndex = 0;
             this.ErrorText.TabStop = false;
             this.ErrorText.Text = "All Clear!";
+            // 
+            // Edit_button
+            // 
+            this.Edit_button.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Edit_button.BackColor = System.Drawing.Color.DarkKhaki;
+            this.Edit_button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.Edit_button.FlatAppearance.BorderColor = System.Drawing.Color.Red;
+            this.Edit_button.FlatAppearance.BorderSize = 0;
+            this.Edit_button.Location = new System.Drawing.Point(8, 94);
+            this.Edit_button.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Edit_button.Name = "Edit_button";
+            this.Edit_button.Size = new System.Drawing.Size(215, 78);
+            this.Edit_button.TabIndex = 2;
+            this.Edit_button.Text = "&Edit";
+            this.Edit_button.UseVisualStyleBackColor = false;
+            this.Edit_button.Click += new System.EventHandler(this.Edit_button_Click);
             // 
             // Form1
             // 
@@ -315,7 +315,6 @@
         private System.Windows.Forms.RichTextBox TreeText;
         private System.Windows.Forms.FlowLayoutPanel MainMenu;
         private System.Windows.Forms.Button OpenFile_button;
-        private System.Windows.Forms.Button Edit_button;
         private System.Windows.Forms.Button Save_button;
         private System.Windows.Forms.Button LA_button;
         private System.Windows.Forms.Button TT_button;
@@ -325,6 +324,7 @@
         private System.Windows.Forms.SplitContainer SubContainer;
         private System.Windows.Forms.Panel TreePanel;
         private System.Windows.Forms.Panel CodePanel;
+        private System.Windows.Forms.Button Edit_button;
     }
 }
 
