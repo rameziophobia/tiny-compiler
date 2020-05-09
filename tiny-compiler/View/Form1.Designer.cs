@@ -33,6 +33,7 @@
             this.MainContainer = new System.Windows.Forms.SplitContainer();
             this.MainMenu = new System.Windows.Forms.FlowLayoutPanel();
             this.OpenFile_button = new System.Windows.Forms.Button();
+            this.Edit_button = new System.Windows.Forms.Button();
             this.Save_button = new System.Windows.Forms.Button();
             this.LA_button = new System.Windows.Forms.Button();
             this.TT_button = new System.Windows.Forms.Button();
@@ -43,7 +44,6 @@
             this.CodeText = new System.Windows.Forms.RichTextBox();
             this.TreeText = new System.Windows.Forms.RichTextBox();
             this.ErrorText = new System.Windows.Forms.RichTextBox();
-            this.Edit_button = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.MainContainer)).BeginInit();
             this.MainContainer.Panel1.SuspendLayout();
             this.MainContainer.Panel2.SuspendLayout();
@@ -90,6 +90,7 @@
             // 
             // MainMenu
             // 
+            this.MainMenu.BackColor = System.Drawing.Color.Snow;
             this.MainMenu.Controls.Add(this.OpenFile_button);
             this.MainMenu.Controls.Add(this.Edit_button);
             this.MainMenu.Controls.Add(this.Save_button);
@@ -107,7 +108,7 @@
             // 
             this.OpenFile_button.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.OpenFile_button.BackColor = System.Drawing.Color.DarkKhaki;
+            this.OpenFile_button.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.OpenFile_button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.OpenFile_button.FlatAppearance.BorderColor = System.Drawing.Color.Red;
             this.OpenFile_button.FlatAppearance.BorderSize = 0;
@@ -120,11 +121,28 @@
             this.OpenFile_button.UseVisualStyleBackColor = false;
             this.OpenFile_button.Click += new System.EventHandler(this.OpenFile_button_Click);
             // 
+            // Edit_button
+            // 
+            this.Edit_button.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Edit_button.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.Edit_button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.Edit_button.FlatAppearance.BorderColor = System.Drawing.Color.Red;
+            this.Edit_button.FlatAppearance.BorderSize = 0;
+            this.Edit_button.Location = new System.Drawing.Point(8, 94);
+            this.Edit_button.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Edit_button.Name = "Edit_button";
+            this.Edit_button.Size = new System.Drawing.Size(215, 78);
+            this.Edit_button.TabIndex = 2;
+            this.Edit_button.Text = "&Edit";
+            this.Edit_button.UseVisualStyleBackColor = false;
+            this.Edit_button.Click += new System.EventHandler(this.Edit_button_Click);
+            // 
             // Save_button
             // 
             this.Save_button.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.Save_button.BackColor = System.Drawing.Color.DarkKhaki;
+            this.Save_button.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.Save_button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.Save_button.FlatAppearance.BorderColor = System.Drawing.Color.Red;
             this.Save_button.FlatAppearance.BorderSize = 0;
@@ -141,7 +159,7 @@
             // 
             this.LA_button.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.LA_button.BackColor = System.Drawing.Color.DarkKhaki;
+            this.LA_button.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.LA_button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.LA_button.FlatAppearance.BorderColor = System.Drawing.Color.Red;
             this.LA_button.FlatAppearance.BorderSize = 0;
@@ -158,7 +176,7 @@
             // 
             this.TT_button.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.TT_button.BackColor = System.Drawing.Color.DarkKhaki;
+            this.TT_button.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.TT_button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.TT_button.FlatAppearance.BorderColor = System.Drawing.Color.Red;
             this.TT_button.FlatAppearance.BorderSize = 0;
@@ -173,7 +191,7 @@
             // 
             // Exit_button
             // 
-            this.Exit_button.BackColor = System.Drawing.Color.DarkKhaki;
+            this.Exit_button.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.Exit_button.Location = new System.Drawing.Point(8, 422);
             this.Exit_button.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Exit_button.Name = "Exit_button";
@@ -238,8 +256,10 @@
             // 
             // TreeText
             // 
+            this.TreeText.BackColor = System.Drawing.Color.Black;
             this.TreeText.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TreeText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TreeText.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F);
+            this.TreeText.ForeColor = System.Drawing.Color.White;
             this.TreeText.Location = new System.Drawing.Point(0, 0);
             this.TreeText.Name = "TreeText";
             this.TreeText.ReadOnly = true;
@@ -250,11 +270,11 @@
             // 
             // ErrorText
             // 
-            this.ErrorText.BackColor = System.Drawing.Color.Bisque;
+            this.ErrorText.BackColor = System.Drawing.Color.GhostWhite;
             this.ErrorText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.ErrorText.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ErrorText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ErrorText.ForeColor = System.Drawing.Color.Red;
+            this.ErrorText.ForeColor = System.Drawing.Color.Crimson;
             this.ErrorText.Location = new System.Drawing.Point(0, 0);
             this.ErrorText.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ErrorText.Name = "ErrorText";
@@ -263,23 +283,6 @@
             this.ErrorText.TabIndex = 0;
             this.ErrorText.TabStop = false;
             this.ErrorText.Text = "All Clear!";
-            // 
-            // Edit_button
-            // 
-            this.Edit_button.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Edit_button.BackColor = System.Drawing.Color.DarkKhaki;
-            this.Edit_button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.Edit_button.FlatAppearance.BorderColor = System.Drawing.Color.Red;
-            this.Edit_button.FlatAppearance.BorderSize = 0;
-            this.Edit_button.Location = new System.Drawing.Point(8, 94);
-            this.Edit_button.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Edit_button.Name = "Edit_button";
-            this.Edit_button.Size = new System.Drawing.Size(215, 78);
-            this.Edit_button.TabIndex = 2;
-            this.Edit_button.Text = "&Edit";
-            this.Edit_button.UseVisualStyleBackColor = false;
-            this.Edit_button.Click += new System.EventHandler(this.Edit_button_Click);
             // 
             // Form1
             // 

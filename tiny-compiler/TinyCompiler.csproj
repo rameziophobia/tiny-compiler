@@ -53,6 +53,7 @@
     <Compile Include="Model\ParserTree.cs" />
     <Compile Include="Model\StatementNode.cs" />
     <Compile Include="Model\Token.cs" />
+    <Compile Include="Model\Error.cs" />
     <Compile Include="Model\TreeNode.cs" />
     <Compile Include="View\Form1.cs">
       <SubType>Form</SubType>

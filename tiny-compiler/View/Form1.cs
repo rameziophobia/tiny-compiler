@@ -60,7 +60,7 @@ namespace TinyCompiler
                 TreeText.Text = tableText;
 
                 string errorString = "";
-                foreach(string error in scanner.Errors)
+                foreach(string error in Error.getErrorList())
                 {
                     errorString += error + "\n";
                 }

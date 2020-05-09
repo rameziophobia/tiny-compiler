@@ -13,8 +13,7 @@ namespace TinyCompiler.Controller
         private string fileText;
         private int lineCount = 1;
         private int indexInCurrentLine = 0;
-        public List<String> Errors { private set;  get; }
-
+        public List<String> Errors = Error.getErrorList();
         public List<Token> getTokens()
         {
             Errors = new List<string>();
@@ -29,21 +28,21 @@ namespace TinyCompiler.Controller
             return tokens;
         }
 
-        public Token getSafeToken ()
+        public Token getSafeToken()
         {
             bool safe = false;
             Token t = null;
-            while(!safe)
+            while (!safe)
             {
                 try
                 {
                     t = getToken();
-                    if(t.Type != TokenType.Comment)
+                    if (t.Type != TokenType.Comment)
                     {
                         safe = true;
                     }
                 }
-                catch(TokenizationException e)
+                catch (Error.TokenizationException e)
                 {
                     Errors.Add(e.Message);
                 }
@@ -123,7 +122,7 @@ namespace TinyCompiler.Controller
                         break;
                     case State.Int:
                         current_token.Type = TokenType.Integer;
-                        if(char.IsDigit(ch))
+                        if (char.IsDigit(ch))
                         {
                             lexeme += ch;
                         }
@@ -140,7 +139,7 @@ namespace TinyCompiler.Controller
                         break;
                     case State.Float:
                         current_token.Type = TokenType.Float;
-                        if(Char.IsDigit(ch))
+                        if (Char.IsDigit(ch))
                             lexeme += ch;
                         else
                         {
@@ -151,7 +150,7 @@ namespace TinyCompiler.Controller
                     case State.intToFloat:
                         current_token.Type = TokenType.Float;
                         current_state = State.Float;
-                        if(Char.IsDigit(ch))
+                        if (Char.IsDigit(ch))
                             lexeme += ch;
                         else
                         {
@@ -162,7 +161,7 @@ namespace TinyCompiler.Controller
                         break;
                     case State.String:
                         current_token.Type = TokenType.String;
-                        if(ch == '"')
+                        if (ch == '"')
                             current_state = State.Done;
                         lexeme += ch;
                         break;
@@ -230,12 +229,11 @@ namespace TinyCompiler.Controller
                         break;
                 }
             }
-            
-            if(current_state == State.Error)
-            {
-                throw new TokenizationException(lineCount, indexInCurrentLine, errorExpectedFound.Item1, errorExpectedFound.Item2);
-            }
 
+            if (current_state == State.Error)
+            {
+                throw new Error.TokenizationException(lineCount, indexInCurrentLine, errorExpectedFound.Item1, errorExpectedFound.Item2);
+            }
 
             current_token.Lexeme = lexeme;
             if (current_token.Type == TokenType.Id)
@@ -257,7 +255,6 @@ namespace TinyCompiler.Controller
             indexInCurrentLine++;
             return thisChar;
         }
-
         private State getNewState(Char c)
         {
             State state = State.Error;
@@ -287,9 +284,9 @@ namespace TinyCompiler.Controller
                     else if (Char.IsDigit(c))
                         state = State.Int;
                     else if (c == ' ' || c == '\t' || c == '\n')
-                    { 
+                    {
                         state = State.Start;
-                        if(c == '\n')
+                        if (c == '\n')
                         {
                             lineCount++;
                             indexInCurrentLine = 0;
@@ -306,18 +303,16 @@ namespace TinyCompiler.Controller
                         }
                     break;
             }
-            if(state == State.Error)
+            if (state == State.Error)
             {
-                throw new TokenizationException(lineCount, indexInCurrentLine, "nothing expected" , c.ToString());
+                throw new Error.TokenizationException(lineCount, indexInCurrentLine, "nothing expected", c.ToString());
             }
             if (state != State.Start)
             {
                 lexeme += c;
             }
-                
             return state;
         }
-
         private void setTypeIfReserved()
         {
             foreach (string word in Token.RESERVED_WORDS.Keys)
@@ -327,13 +322,6 @@ namespace TinyCompiler.Controller
                     current_token.Type = Token.RESERVED_WORDS[word];
                 }
             }
-        }
-    }
-    internal class TokenizationException : Exception
-    {
-        public TokenizationException (int lineCount, int indexInCurrentLine, string expected, string found)
-        : base($"syntax error in line {lineCount} at {indexInCurrentLine} found '{found}', expecting a '{expected}'")
-        {
         }
     }
 }
