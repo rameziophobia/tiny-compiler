@@ -4,13 +4,28 @@ using System.Windows.Forms;
 using TinyCompiler.Controller;
 using TinyCompiler.Model;
 using TinyCompiler.View;
+using TreeNode = TinyCompiler.Model.TreeNode;
 
 namespace TinyCompiler
 {
     public partial class Form1 : Form
     {
+        ParserTree parserTree = new ParserTree();
+        TreeNode root = new ExpNode("1");
+        TreeNode node2 = new ExpNode("2");
+        TreeNode node3 = new ExpNode("3");
+        TreeNode node4 = new StatementNode("4");
+        TreeNode node5 = new StatementNode("5");
+        TreeNode node6 = new StatementNode("6");
+        TreeNode node7 = new StatementNode("7");
         public Form1()
         {
+            root.AddChild(node2);
+            root.AddChild(node3);
+            node2.AddChild(node4);
+            node2.AddChild(node5);
+            node3.AddChild(node6);
+            node3.AddChild(node7);
             InitializeComponent();
         }
         private void OpenFile_button_Click(object sender, EventArgs e)
@@ -76,6 +91,9 @@ namespace TinyCompiler
         }
         private void TT_button_Click(object sender, EventArgs e)
         {
+
+            parserTree.makeGraph(root);
+            parserTree.showForm();
         }
         OpenFileDialog OFD_Setup()
         {
@@ -94,6 +112,13 @@ namespace TinyCompiler
         private void Exit_button_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            root.removeChild(new TreeNode("2"));
         }
     }
 }
