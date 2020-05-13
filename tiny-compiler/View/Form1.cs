@@ -1,17 +1,103 @@
 ﻿using System;
+using System.CodeDom.Compiler;
 using System.IO;
 using System.Windows.Forms;
 using TinyCompiler.Controller;
 using TinyCompiler.Model;
+using TreeNode = TinyCompiler.Model.TreeNode;
 
 namespace TinyCompiler
 {
     public partial class Form1 : Form
     {
         ParserTree parserTree = new ParserTree();
+        Token temp = new Token();
+        TreeNode readX;
 
         public Form1()
         {
+            temp.Lexeme = "Read X";
+            readX =  new ExpNode(temp);
+            Token temp2 = new Token();
+            temp2.Lexeme = "if"; 
+            TreeNode if1 = new ExpNode(temp2);
+            Token temp3 = new Token();
+            temp3.Lexeme = "op (<)";  
+            TreeNode op1 = new StatementNode(temp3);
+            Token temp4 = new Token();
+            temp4.Lexeme = "const (0)";  
+            TreeNode const0 = new StatementNode(temp4);
+            Token temp5 = new Token();
+            temp5.Lexeme = "const (0)1";   
+            TreeNode const02 = new StatementNode(temp5);
+            Token temp6 = new Token();
+            temp6.Lexeme = "id (x)";   
+            TreeNode idX = new StatementNode(temp6);
+            Token temp7 = new Token();
+            temp7.Lexeme = "id (x)";   
+            TreeNode idX2 = new StatementNode(temp7);
+            Token temp8 = new Token();
+            temp8.Lexeme = "id (x)";   
+            TreeNode idX3 = new StatementNode(temp8);
+            Token temp9 = new Token();
+            temp9.Lexeme = "id (x)";   
+            TreeNode idX4 = new StatementNode(temp9);
+            Token temp10 = new Token();
+            temp10.Lexeme = "id (fact)";   
+            TreeNode idFact = new StatementNode(temp10);
+            Token temp11 = new Token();
+            temp11.Lexeme = "id (fact)";   
+            TreeNode idFact2 = new StatementNode(temp11);
+            Token temp12 = new Token();
+            temp12.Lexeme = "asssign (fact)";   
+            TreeNode assignFact = new ExpNode(temp12);
+            Token temp13 = new Token();
+            temp13.Lexeme = "asssign (fact)";   
+            TreeNode assignFact2 = new ExpNode(temp13);
+            Token temp14 = new Token();
+            temp14.Lexeme = "op (-)";   
+            TreeNode opMinus = new StatementNode(temp14);
+            Token temp15 = new Token();
+            temp15.Lexeme = "op (-)";   
+            TreeNode opMinus2 = new StatementNode(temp15);
+            Token temp16 = new Token();
+            temp16.Lexeme = "op (-)";   
+            TreeNode opMinus3 = new StatementNode(temp16);
+            Token temp17 = new Token();
+            temp17.Lexeme = "asssign (X)";   
+            TreeNode assignX = new ExpNode(temp17);
+            Token temp18 = new Token();
+            temp18.Lexeme = "Const (1)";   
+            TreeNode const1 = new StatementNode(temp18);
+            Token temp19 = new Token();
+            temp19.Lexeme = "Const (1)";   
+            TreeNode const12 = new StatementNode(temp19);
+            Token temp20 = new Token();
+            temp20.Lexeme = "repeat";   
+            TreeNode repeat = new ExpNode(temp20);
+            Token temp21 = new Token();
+            temp21.Lexeme = "write";   
+            TreeNode write = new ExpNode(temp21);
+            readX.Siblings.Add(if1);
+            if1.Children.Add(op1);
+            if1.Children.Add(assignFact);
+            op1.Children.Add(const0);
+            op1.Children.Add(idX);
+            assignFact.Children.Add(const12);
+            assignFact.Siblings.Add(repeat);
+            repeat.Siblings.Add(write);
+            write.Children.Add(idFact2);
+            repeat.Children.Add(assignFact2);
+            assignFact2.Children.Add(opMinus2);
+            opMinus.Children.Add(const1);
+            opMinus.Children.Add(idX3);
+            assignFact2.Children.Add(assignX);
+            assignX.Children.Add(opMinus);
+            opMinus2.Children.Add(idFact);
+            opMinus2.Children.Add(idX2);
+            repeat.Children.Add(opMinus3);
+            opMinus3.Children.Add(idX4);
+            opMinus3.Children.Add(const02);
             InitializeComponent();
         }
         private void OpenFile_button_Click(object sender, EventArgs e)
@@ -77,9 +163,9 @@ namespace TinyCompiler
         }
         private void TT_button_Click(object sender, EventArgs e)
         {
-            Parser parser = new Parser(new Scanner(CodeText.Text + " ").getTokens());
+/*            Parser parser = new Parser(new Scanner(CodeText.Text + " ").getTokens());*/
 
-            parserTree.makeGraph(parser.parse());
+            parserTree.makeGraph(readX);
             parserTree.showForm();
         }
         OpenFileDialog OFD_Setup()
