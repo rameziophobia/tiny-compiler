@@ -67,6 +67,7 @@ namespace TinyCompiler.Controller
                 TreeNode sibling = getStatement();
 
                 currentNode.Siblings.Add(sibling);
+                currentNode = sibling;
 
                 currentTokenIndex++;
             }
@@ -91,7 +92,6 @@ namespace TinyCompiler.Controller
                 case TokenType.Comment:
                     throw new NotImplementedException();
                 default:
-                    //error: expected XXXX
                     throw new InvalidSyntaxException(tokens[currentTokenIndex]);
             }
         }
