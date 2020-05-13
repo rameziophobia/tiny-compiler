@@ -20,9 +20,6 @@ factor -> (exp) | **number** | **identifier**\
 
 ## EBNF
 
-> double chcek !!!!!!!!!!!!!!!!!!!!!!!!11\
-> left recursive ??
-
 program -> stmt-sequence\
 stmt-sequence -> statement {; statement}\
 statement -> if-stmt | repeat-stmt | assign-stmt | read-stmt | write-stmt\

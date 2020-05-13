@@ -71,8 +71,6 @@ namespace TinyCompiler.Controller
 
                 currentTokenIndex++;
             }
-
-            //more statements ?
             return rootNode;
         }
         private TreeNode getStatement()
