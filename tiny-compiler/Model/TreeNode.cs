@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Linq;
@@ -13,12 +13,15 @@ namespace TinyCompiler.Model
         public string Name { get; set; }
         public TreeNode Parent {get;set;}
         public List<TreeNode> Children { get; set; }
+        public List<TreeNode> Siblings { get; set; }
         public Microsoft.Msagl.Drawing.Shape Shape { get; set; }
         public Microsoft.Msagl.Drawing.Color Color { get; set; }
         public TreeNode(string name = "", TreeNode parent = null, List<TreeNode> children = null)
+        public TreeNode(string name = "", TreeNode parent = null, List<TreeNode> children = null, List<TreeNode> siblings = null)
         {
             this.Name = name;
             this.Children = new List<TreeNode>();
+            this.Siblings = new List<TreeNode>();
             if (parent != null)
             {
                 this.Parent = parent;
@@ -26,6 +29,10 @@ namespace TinyCompiler.Model
             if (children != null)
             {
                 this.Children = children;
+            } 
+            if (siblings != null)
+            {
+                this.Siblings = siblings;
             }
             Shape =  Microsoft.Msagl.Drawing.Shape.Diamond;
             Color = Microsoft.Msagl.Drawing.Color.Red;
@@ -42,7 +49,10 @@ namespace TinyCompiler.Model
         {
             this.Children.AddRange(children);
         }
-
+        public void AddSibling(TreeNode sibling)
+        {
+            this.Siblings.Add(sibling);
+        }
         public void removeChild(TreeNode childToRemove)
         {
             TreeNode removedNode = null;
