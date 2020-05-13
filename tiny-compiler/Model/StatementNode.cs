@@ -1,14 +1,12 @@
-﻿using System.Collections.Generic;
-
+﻿using Microsoft.Msagl.Drawing;
 namespace TinyCompiler.Model
 {
     class StatementNode : TreeNode
     {
-        public StatementNode(Token token, TreeNode parent = null, List<TreeNode> children = null) : base(token, parent, children)
+        public StatementNode(Token token, TreeNode parent = null) : base(token, parent)
         {
-            this.Color = Microsoft.Msagl.Drawing.Color.LimeGreen;
-            this.Shape = Microsoft.Msagl.Drawing.Shape.Circle;
-
+            Color = Color.LimeGreen;
+            Shape = Shape.Circle;
         }
     }
 }

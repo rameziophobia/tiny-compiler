@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.Msagl.Drawing;
+using System.Collections.Generic;
 
 namespace TinyCompiler.Model
 {
@@ -8,33 +9,22 @@ namespace TinyCompiler.Model
         public TreeNode Parent { get; set; }
         public List<TreeNode> Children { get; set; }
         public List<TreeNode> Siblings { get; set; }
-        public Microsoft.Msagl.Drawing.Shape Shape { get; set; }
-        public Microsoft.Msagl.Drawing.Color Color { get; set; }
+        public Shape Shape { get; set; }
+        public Color Color { get; set; }
         public Token Token { get; }
         public string ExtraText { get; set; }
 
         private static int counter = 0;
 
-        public TreeNode(Token token, TreeNode parent = null, List<TreeNode> children = null, List<TreeNode> siblings = null)
+        public TreeNode(Token token, TreeNode parent = null)
         {
-            this.ID = counter.ToString();
+            ID = counter.ToString();
             counter++;
-            this.Children = new List<TreeNode>();
-            this.Siblings = new List<TreeNode>();
-            if (parent != null)
-            {
-                this.Parent = parent;
-            }
-            if (children != null)
-            {
-                this.Children = children;
-            }
-            if (siblings != null)
-            {
-                this.Siblings = siblings;
-            }
-            Shape = Microsoft.Msagl.Drawing.Shape.Diamond;
-            Color = Microsoft.Msagl.Drawing.Color.Red;
+            Children = new List<TreeNode>();
+            Siblings = new List<TreeNode>();
+            Parent = parent;
+            Shape = Shape.Diamond;
+            Color = Color.Red;
             Token = token;
         }
 
@@ -43,22 +33,6 @@ namespace TinyCompiler.Model
             return Token.Lexeme + "\n" + ExtraText;
         }
 
-        public void setParent(TreeNode parent)
-        {
-            this.Parent = parent;
-        }
-        public void AddChild(TreeNode child)
-        {
-            this.Children.Add(child);
-        }
-        public void AddChildren(List<TreeNode> children)
-        {
-            this.Children.AddRange(children);
-        }
-        public void AddSibling(TreeNode sibling)
-        {
-            this.Siblings.Add(sibling);
-        }
         //public void removeChild(TreeNode childToRemove)
         //{
         //    TreeNode removedNode = null;

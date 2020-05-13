@@ -1,13 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.Msagl.Drawing;
 
 namespace TinyCompiler.Model
 {
     class ExpNode : TreeNode
     {
-        public ExpNode(Token token, TreeNode parent = null, List<TreeNode> children = null) : base(token, parent, children)
+        public ExpNode(Token token, TreeNode parent = null) : base(token, parent)
         {
-            this.Color = Microsoft.Msagl.Drawing.Color.Cyan;
-            this.Shape = Microsoft.Msagl.Drawing.Shape.Box;
+            Color = Color.Cyan;
+            Shape = Shape.Box;
         }
     }
 }
