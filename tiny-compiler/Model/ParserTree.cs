@@ -41,7 +41,13 @@ namespace TinyCompiler.Model
                 graph.AddEdge(rootNode.ID, node.ID);
                 graph.FindNode(node.ID).LabelText = node.Name;
                 graph.FindNode(rootNode.ID).LabelText = rootNode.Name;
+                
                 updateGraph(node);
+            }
+            if(rootNode.Children.Count == 0  && rootNode.Siblings.Count == 0)
+            {
+                graph.AddNode(rootNode.ID);
+                graph.FindNode(rootNode.ID).LabelText = rootNode.Name;
             }
             graph.FindNode(rootNode.ID).Attr.Shape = rootNode.Shape;
             graph.FindNode(rootNode.ID).Attr.FillColor = rootNode.Color;
