@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Msagl.Drawing;
+using System.Diagnostics;
 
 namespace TinyCompiler.Model
 {
@@ -27,13 +28,23 @@ namespace TinyCompiler.Model
         }
         private void updateGraph(TreeNode rootNode)
         {
-            foreach (var node in rootNode.Children)
+            foreach (var node in rootNode.Siblings)
             {
-                graph.AddEdge(rootNode.Name, node.Name);
+                graph.AddEdge(rootNode.ID, node.ID);
+                graph.FindNode(node.ID).LabelText = node.Name;
+                graph.FindNode(rootNode.ID).LabelText = rootNode.Name;
                 updateGraph(node);
             }
-            graph.FindNode(rootNode.Name).Attr.Shape = rootNode.Shape;
-            graph.FindNode(rootNode.Name).Attr.FillColor = rootNode.Color;
+
+            foreach (var node in rootNode.Children)
+            {
+                graph.AddEdge(rootNode.ID, node.ID);
+                graph.FindNode(node.ID).LabelText = node.Name;
+                graph.FindNode(rootNode.ID).LabelText = rootNode.Name;
+                updateGraph(node);
+            }
+            graph.FindNode(rootNode.ID).Attr.Shape = rootNode.Shape;
+            graph.FindNode(rootNode.ID).Attr.FillColor = rootNode.Color;
 
         }
         private void updateView()
