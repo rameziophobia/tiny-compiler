@@ -1,25 +1,30 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Msagl.Drawing;
+using System.Diagnostics;
 
 namespace TinyCompiler.Model
 {
     class TreeNode
     {
         public string Name { get; set; }
+        public string ID { get; set; }
         public TreeNode Parent {get;set;}
         public List<TreeNode> Children { get; set; }
+
         public List<TreeNode> Siblings { get; set; }
         public Microsoft.Msagl.Drawing.Shape Shape { get; set; }
         public Microsoft.Msagl.Drawing.Color Color { get; set; }
-        public TreeNode(string name = "", TreeNode parent = null, List<TreeNode> children = null)
+        private static int counter = 0; 
         public TreeNode(string name = "", TreeNode parent = null, List<TreeNode> children = null, List<TreeNode> siblings = null)
         {
             this.Name = name;
+            this.ID = name + counter;
+            counter++;
             this.Children = new List<TreeNode>();
             this.Siblings = new List<TreeNode>();
             if (parent != null)
