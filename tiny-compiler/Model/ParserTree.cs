@@ -1,19 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Msagl.Drawing;
-using System.Diagnostics;
+﻿using System.Windows.Forms;
 
 namespace TinyCompiler.Model
 {
     class ParserTree
     {
-        //create a form 
+        //create a form
         private System.Windows.Forms.Form form = new System.Windows.Forms.Form();
-        //create a viewer object 
+        //create a viewer object
         private Microsoft.Msagl.Drawing.Graph graph = new Microsoft.Msagl.Drawing.Graph();
         private Microsoft.Msagl.GraphViewerGdi.GViewer viewer = new Microsoft.Msagl.GraphViewerGdi.GViewer();
         public ParserTree()
@@ -58,8 +51,8 @@ namespace TinyCompiler.Model
             updateView();
             form.WindowState = FormWindowState.Maximized;
             form.ShowDialog();
-            
+
         }
-       
-    } 
+
+    }
 }

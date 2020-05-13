@@ -14,7 +14,7 @@ namespace TinyCompiler.Controller
     // todo implement methods: program stmt_sequence, statement, if_stmt, read_stmt, write_stmt, assign_stmt
 
     // Task III
-    // todo change rules to EBNF and implement their methods 
+    // todo change rules to EBNF and implement their methods
     // *note law 3ayzin t2asemo el methods ma3 ba3d differently -> sure
     // todo repeat_stmt, exp, comparison_op, simple_exp, add_op, term, mul_op, factor
 
@@ -38,7 +38,7 @@ namespace TinyCompiler.Controller
         {
             this.tokens = tokens;
             Token endOfFile = new Token();
-            endOfFile.Type =TokenType.EndOfFile;
+            endOfFile.Type = TokenType.EndOfFile;
             tokens.Add(endOfFile);
         }
 
@@ -47,7 +47,7 @@ namespace TinyCompiler.Controller
             return getStmtSequence();
         }
 
-        // change return type 
+        // change return type
         public void getGraphData()
         {
 
@@ -126,7 +126,6 @@ namespace TinyCompiler.Controller
 
             return treeNode;
         }
-
 
         private TreeNode getRepeatTreeNode()
         {

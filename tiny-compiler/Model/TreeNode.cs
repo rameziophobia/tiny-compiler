@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Msagl.Drawing;
-using System.Diagnostics;
+﻿using System.Collections.Generic;
 
 namespace TinyCompiler.Model
 {

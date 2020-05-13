@@ -3,8 +3,6 @@ using System.IO;
 using System.Windows.Forms;
 using TinyCompiler.Controller;
 using TinyCompiler.Model;
-using TinyCompiler.View;
-using TreeNode = TinyCompiler.Model.TreeNode;
 
 namespace TinyCompiler
 {
@@ -48,12 +46,12 @@ namespace TinyCompiler
         }
         private void LA_button_Click(object sender, EventArgs e)
         {
-            if(CodeText.Text != "")
+            if (CodeText.Text != "")
             {
                 Scanner scanner = new Scanner(CodeText.Text + " ");
                 var tokens = scanner.getTokens();
                 string tableText = "";
-                foreach(Token token in tokens)
+                foreach (Token token in tokens)
                 {
                     tableText += token.Lexeme + "\t\t\t\t" + token.Type.ToString() + "\n";
                 }
@@ -63,11 +61,11 @@ namespace TinyCompiler
                 TreeText.Text = tableText;
 
                 string errorString = "";
-                foreach(string error in Error.getErrorList())
+                foreach (string error in Error.getErrorList())
                 {
                     errorString += error + "\n";
                 }
-                if(errorString.Length != 0)
+                if (errorString.Length != 0)
                 {
                     ErrorText.Text = errorString;
                 }
@@ -79,7 +77,7 @@ namespace TinyCompiler
         }
         private void TT_button_Click(object sender, EventArgs e)
         {
-            Parser parser = new Parser(new Scanner(CodeText.Text + " ").getTokens()) ;
+            Parser parser = new Parser(new Scanner(CodeText.Text + " ").getTokens());
 
             parserTree.makeGraph(parser.parse());
             parserTree.showForm();

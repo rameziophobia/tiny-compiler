@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 enum TokenType
 {
@@ -13,18 +9,18 @@ enum TokenType
     NumFloat,
 
     //reserved words
-    If, 
-    Then, 
-    Else, 
-    ElseIf, 
-    End, 
+    If,
+    Then,
+    Else,
+    ElseIf,
+    End,
     Repeat,
-    Until, 
+    Until,
     Read,
     Write,
     Return,
     EndLine,
-    
+
     // data type
     String,
     Integer,
@@ -50,7 +46,7 @@ enum TokenType
     //todo boolean operators 
     BoolOR,
     BoolAnd,
-    
+
     Assign, //todo
     BraceLeft,
     BraceRight,
@@ -72,7 +68,7 @@ enum State
     String,
     Start,
     Done,
-    InComment, 
+    InComment,
     InSlash,
     EndingComment,
     Error,
@@ -83,25 +79,25 @@ namespace TinyCompiler.Model
 {
     class Token
     {
-        public readonly static Dictionary<string, TokenType> RESERVED_WORDS = 
+        public readonly static Dictionary<string, TokenType> RESERVED_WORDS =
             new Dictionary<string, TokenType>{
-                { "if" , TokenType.If}, 
-                { "then" , TokenType.Then}, 
-                { "else" , TokenType.Else}, 
-                { "elseif" , TokenType.ElseIf}, 
-                { "end" , TokenType.End}, 
-                { "repeat" , TokenType.Repeat}, 
-                { "until" , TokenType.Until}, 
-                { "return" , TokenType.Return}, 
-                { "endl" , TokenType.EndLine}, 
-                { "read" , TokenType.Read}, 
+                { "if" , TokenType.If},
+                { "then" , TokenType.Then},
+                { "else" , TokenType.Else},
+                { "elseif" , TokenType.ElseIf},
+                { "end" , TokenType.End},
+                { "repeat" , TokenType.Repeat},
+                { "until" , TokenType.Until},
+                { "return" , TokenType.Return},
+                { "endl" , TokenType.EndLine},
+                { "read" , TokenType.Read},
                 { "write" , TokenType.Write},
                 { "string" , TokenType.StringType},
                 { "int" , TokenType.IntegerType},
                 { "float" , TokenType.FloatType}
             };
 
-        public readonly static Dictionary<string, TokenType> SPECIAL_SYMBOLS = 
+        public readonly static Dictionary<string, TokenType> SPECIAL_SYMBOLS =
             new Dictionary<string, TokenType>{
                 { "=", TokenType.IsEqual},
                 { "<", TokenType.LessThan},
