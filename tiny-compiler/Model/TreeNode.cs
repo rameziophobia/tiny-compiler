@@ -11,19 +11,20 @@ namespace TinyCompiler.Model
 {
     class TreeNode
     {
-        public string Name { get; set; }
         public string ID { get; set; }
-        public TreeNode Parent {get;set;}
+        public TreeNode Parent { get; set; }
         public List<TreeNode> Children { get; set; }
-
         public List<TreeNode> Siblings { get; set; }
         public Microsoft.Msagl.Drawing.Shape Shape { get; set; }
         public Microsoft.Msagl.Drawing.Color Color { get; set; }
-        private static int counter = 0; 
-        public TreeNode(string name = "", TreeNode parent = null, List<TreeNode> children = null, List<TreeNode> siblings = null)
+        public Token Token { get; }
+        public string ExtraText { get; set; }
+
+        private static int counter = 0;
+
+        public TreeNode(Token token, TreeNode parent = null, List<TreeNode> children = null, List<TreeNode> siblings = null)
         {
-            this.Name = name;
-            this.ID = name + counter;
+            this.ID = counter.ToString();
             counter++;
             this.Children = new List<TreeNode>();
             this.Siblings = new List<TreeNode>();
@@ -34,14 +35,21 @@ namespace TinyCompiler.Model
             if (children != null)
             {
                 this.Children = children;
-            } 
+            }
             if (siblings != null)
             {
                 this.Siblings = siblings;
             }
-            Shape =  Microsoft.Msagl.Drawing.Shape.Diamond;
+            Shape = Microsoft.Msagl.Drawing.Shape.Diamond;
             Color = Microsoft.Msagl.Drawing.Color.Red;
+            Token = token;
         }
+
+        public string getDisplayLabel()
+        {
+            return Token.Lexeme + "\n" + ExtraText;
+        }
+
         public void setParent(TreeNode parent)
         {
             this.Parent = parent;
@@ -58,22 +66,21 @@ namespace TinyCompiler.Model
         {
             this.Siblings.Add(sibling);
         }
-        public void removeChild(TreeNode childToRemove)
-        {
-            TreeNode removedNode = null;
-            foreach (var child in Children)
-            {
-                if (child.Name == childToRemove.Name)
-                {
-                    removedNode = child;
-                }
-            }
-            if (removedNode != null)
-            {
-                removedNode.Parent = null;
-                Children.Remove(removedNode);
-            }
-
-        }
+        //public void removeChild(TreeNode childToRemove)
+        //{
+        //    TreeNode removedNode = null;
+        //    foreach (var child in Children)
+        //    {
+        //        if (child.Name == childToRemove.Name)
+        //        {
+        //            removedNode = child;
+        //        }
+        //    }
+        //    if (removedNode != null)
+        //    {
+        //        removedNode.Parent = null;
+        //        Children.Remove(removedNode);
+        //    }
+        //}
     }
 }

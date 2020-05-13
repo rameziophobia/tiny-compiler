@@ -11,50 +11,9 @@ namespace TinyCompiler
     public partial class Form1 : Form
     {
         ParserTree parserTree = new ParserTree();
-        TreeNode readX = new ExpNode("Read X");
-        TreeNode if1 = new ExpNode("if");
-        TreeNode op1 = new StatementNode("op (<)");
-        TreeNode const0 = new StatementNode("const (0)");
-        TreeNode const02 = new StatementNode("const (0)");
-        TreeNode idX = new StatementNode("id (x)");
-        TreeNode idX2 = new StatementNode("id (x)");
-        TreeNode idX3 = new StatementNode("id (x)");
-        TreeNode idX4 = new StatementNode("id (x)");
-        TreeNode idFact = new StatementNode("id (fact)");
-        TreeNode idFact2 = new StatementNode("id (fact)");
-        TreeNode assignFact = new ExpNode("asssign (fact)");
-        TreeNode assignFact2 = new ExpNode("asssign (fact)");
-        TreeNode opMinus = new StatementNode("op (-)");
-        TreeNode opMinus2 = new StatementNode("op (-)");
-        TreeNode opMinus3 = new StatementNode("op (-)");
-        TreeNode assignX = new ExpNode("asssign (X)");
-        TreeNode const1 = new StatementNode("Const (1)");
-        TreeNode const12 = new StatementNode("Const (1)");
-        TreeNode repeat = new ExpNode("repeat");
-        TreeNode write = new ExpNode("write");
 
         public Form1()
         {
-            readX.AddSibling(if1);
-            if1.AddChild(op1);
-            if1.AddChild(assignFact);
-            op1.AddChild(const0);
-            op1.AddChild(idX);
-            assignFact.AddChild(const12);
-            assignFact.AddSibling(repeat);
-            repeat.AddSibling(write);
-            write.AddChild(idFact2);
-            repeat.AddChild(assignFact2);
-            assignFact2.AddChild(opMinus2);
-            opMinus.AddChild(const1);
-            opMinus.AddChild(idX3);
-            assignFact2.AddChild(assignX);
-            assignX.AddChild(opMinus);
-            opMinus2.AddChild(idFact);
-            opMinus2.AddChild(idX2);
-            repeat.AddChild(opMinus3);
-            opMinus3.AddChild(idX4);
-            opMinus3.AddChild(const02);
             InitializeComponent();
         }
         private void OpenFile_button_Click(object sender, EventArgs e)
@@ -120,8 +79,9 @@ namespace TinyCompiler
         }
         private void TT_button_Click(object sender, EventArgs e)
         {
+            Parser parser = new Parser(new Scanner(CodeText.Text + " ").getTokens()) ;
 
-            parserTree.makeGraph(readX);
+            parserTree.makeGraph(parser.parse());
             parserTree.showForm();
         }
         OpenFileDialog OFD_Setup()
@@ -147,7 +107,6 @@ namespace TinyCompiler
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
         }
     }
 }

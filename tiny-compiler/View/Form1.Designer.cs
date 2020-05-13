@@ -239,7 +239,7 @@
             // 
             this.SubContainer.Panel2.Controls.Add(this.ErrorText);
             this.SubContainer.Size = new System.Drawing.Size(442, 449);
-            this.SubContainer.SplitterDistance = 320;
+            this.SubContainer.SplitterDistance = 321;
             this.SubContainer.SplitterWidth = 3;
             this.SubContainer.TabIndex = 0;
             // 
@@ -251,7 +251,7 @@
             this.TreePanel.Location = new System.Drawing.Point(0, 0);
             this.TreePanel.Margin = new System.Windows.Forms.Padding(2);
             this.TreePanel.Name = "TreePanel";
-            this.TreePanel.Size = new System.Drawing.Size(442, 320);
+            this.TreePanel.Size = new System.Drawing.Size(442, 321);
             this.TreePanel.TabIndex = 0;
             // 
             // CodePanel
@@ -261,7 +261,7 @@
             this.CodePanel.Location = new System.Drawing.Point(0, 0);
             this.CodePanel.Margin = new System.Windows.Forms.Padding(2);
             this.CodePanel.Name = "CodePanel";
-            this.CodePanel.Size = new System.Drawing.Size(442, 320);
+            this.CodePanel.Size = new System.Drawing.Size(442, 321);
             this.CodePanel.TabIndex = 1;
             // 
             // CodeText
@@ -274,7 +274,7 @@
             this.CodeText.Location = new System.Drawing.Point(0, 0);
             this.CodeText.Margin = new System.Windows.Forms.Padding(2);
             this.CodeText.Name = "CodeText";
-            this.CodeText.Size = new System.Drawing.Size(442, 320);
+            this.CodeText.Size = new System.Drawing.Size(442, 321);
             this.CodeText.TabIndex = 0;
             this.CodeText.TabStop = false;
             this.CodeText.Text = "";
@@ -289,7 +289,7 @@
             this.TreeText.Margin = new System.Windows.Forms.Padding(2);
             this.TreeText.Name = "TreeText";
             this.TreeText.ReadOnly = true;
-            this.TreeText.Size = new System.Drawing.Size(442, 320);
+            this.TreeText.Size = new System.Drawing.Size(442, 321);
             this.TreeText.TabIndex = 0;
             this.TreeText.TabStop = false;
             this.TreeText.Text = "";
@@ -305,7 +305,7 @@
             this.ErrorText.Margin = new System.Windows.Forms.Padding(2);
             this.ErrorText.Name = "ErrorText";
             this.ErrorText.ReadOnly = true;
-            this.ErrorText.Size = new System.Drawing.Size(442, 126);
+            this.ErrorText.Size = new System.Drawing.Size(442, 125);
             this.ErrorText.TabIndex = 0;
             this.ErrorText.TabStop = false;
             this.ErrorText.Text = "All Clear!";

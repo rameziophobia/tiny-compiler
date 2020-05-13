@@ -26,25 +26,25 @@ namespace TinyCompiler.Model
             graph = new Microsoft.Msagl.Drawing.Graph();
             updateGraph(rootNode);
         }
-        private void updateGraph(TreeNode rootNode)
+        private void updateGraph(TreeNode rootTreeNode)
         {
-            foreach (var node in rootNode.Siblings)
+            foreach (var node in rootTreeNode.Siblings)
             {
-                graph.AddEdge(rootNode.ID, node.ID);
-                graph.FindNode(node.ID).LabelText = node.Name;
-                graph.FindNode(rootNode.ID).LabelText = rootNode.Name;
+                graph.AddEdge(rootTreeNode.ID, node.ID);
+                graph.FindNode(node.ID).LabelText = node.getDisplayLabel();
+                graph.FindNode(rootTreeNode.ID).LabelText = rootTreeNode.getDisplayLabel();
                 updateGraph(node);
             }
 
-            foreach (var node in rootNode.Children)
+            foreach (var node in rootTreeNode.Children)
             {
-                graph.AddEdge(rootNode.ID, node.ID);
-                graph.FindNode(node.ID).LabelText = node.Name;
-                graph.FindNode(rootNode.ID).LabelText = rootNode.Name;
+                graph.AddEdge(rootTreeNode.ID, node.ID);
+                graph.FindNode(node.ID).LabelText = node.getDisplayLabel();
+                graph.FindNode(rootTreeNode.ID).LabelText = rootTreeNode.getDisplayLabel();
                 updateGraph(node);
             }
-            graph.FindNode(rootNode.ID).Attr.Shape = rootNode.Shape;
-            graph.FindNode(rootNode.ID).Attr.FillColor = rootNode.Color;
+            graph.FindNode(rootTreeNode.ID).Attr.Shape = rootTreeNode.Shape;
+            graph.FindNode(rootTreeNode.ID).Attr.FillColor = rootTreeNode.Color;
 
         }
         private void updateView()

@@ -59,6 +59,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\InvalidSyntaxException.cs" />
     <Compile Include="Controller\Parser.cs" />
     <Compile Include="Controller\Scanner.cs" />
     <Compile Include="Model\ExpNode.cs" />

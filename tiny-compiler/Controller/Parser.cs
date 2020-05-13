@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TinyCompiler.Model;
 
 namespace TinyCompiler.Controller
@@ -34,27 +31,169 @@ namespace TinyCompiler.Controller
 
     class Parser
     {
-        private List<Token> tokens;
-        Token current_token = new Token();
+        private readonly List<Token> tokens;
+        private int currentTokenIndex = 0;
 
-        public Parser (List<Token> tokens)
+        public Parser(List<Token> tokens)
         {
             this.tokens = tokens;
+            Token endOfFile = new Token();
+            endOfFile.Type =TokenType.EndOfFile;
+            tokens.Add(endOfFile);
+        }
+
+        public TreeNode parse()
+        {
+            return getStmtSequence();
         }
 
         // change return type 
-        public void getGraphData ()
+        public void getGraphData()
         {
 
         }
 
-        private TreeNode stmt_sequence ()
+        private TreeNode getStmtSequence()
         {
-            return new TreeNode();
+            TreeNode rootNode = getStatement();
+            TreeNode currentNode = rootNode;
+
+            currentTokenIndex++;
+            while (tokens[currentTokenIndex].Type != TokenType.EndOfFile)
+            {
+                match(TokenType.SemiColon);
+
+                currentTokenIndex++;
+                TreeNode sibling = getStatement();
+
+                currentNode.Siblings.Add(sibling);
+
+                currentTokenIndex++;
+            }
+
+            //more statements ?
+            return rootNode;
         }
-        private TreeNode statement ()
+        private TreeNode getStatement()
         {
-            return new TreeNode();
+            switch (tokens[currentTokenIndex].Type)
+            {
+                case TokenType.If:
+                    return getIfTreeNode();
+                case TokenType.Repeat:
+                    return getRepeatTreeNode();
+                case TokenType.Read:
+                    return getReadTreeNode();
+                case TokenType.Write:
+                    return getWriteTreeNode();
+                case TokenType.Assign:
+                    return getAssignTreeNode();
+                case TokenType.Comment:
+                    throw new NotImplementedException();
+                default:
+                    //error: expected XXXX
+                    throw new InvalidSyntaxException(tokens[currentTokenIndex]);
+            }
+        }
+        private void match(TokenType expected) // todo rename
+        {
+            if (tokens[currentTokenIndex].Type != expected)
+            {
+                throw new InvalidSyntaxException(tokens[currentTokenIndex], expected);
+            }
+        }
+
+        private TreeNode getIfTreeNode()
+        {
+            TreeNode treeNode = new TreeNode(tokens[currentTokenIndex]);
+
+            currentTokenIndex++;
+            treeNode.Children.Add(getExp());
+
+            currentTokenIndex++;
+            match(TokenType.Then);
+
+            currentTokenIndex++;
+            treeNode.Children.Add(getStmtSequence());
+
+            currentTokenIndex++;
+            if (tokens[currentTokenIndex].Type == TokenType.Else)
+            {
+                treeNode.Children.Add(getStmtSequence());
+                currentTokenIndex++;
+            }
+            match(TokenType.End);
+
+            return treeNode;
+        }
+
+
+        private TreeNode getRepeatTreeNode()
+        {
+            TreeNode treeNode = new TreeNode(tokens[currentTokenIndex]);
+
+            currentTokenIndex++;
+            treeNode.Children.Add(getStmtSequence());
+
+            currentTokenIndex++;
+            match(TokenType.Until);
+
+            currentTokenIndex++;
+            treeNode.Children.Add(getExp());
+
+            return treeNode;
+        }
+        private TreeNode getAssignTreeNode()
+        {
+            TreeNode treeNode = new TreeNode(tokens[currentTokenIndex]);
+
+            match(TokenType.Id);
+            treeNode.ExtraText += tokens[currentTokenIndex].Lexeme;
+
+            currentTokenIndex++;
+            match(TokenType.Assign);
+
+            currentTokenIndex++;
+            treeNode.Children.Add(getExp());
+
+            return treeNode;
+        }
+
+        private TreeNode getReadTreeNode()
+        {
+            TreeNode treeNode = new TreeNode(tokens[currentTokenIndex]);
+
+            currentTokenIndex++;
+            match(TokenType.Id);
+            treeNode.ExtraText += tokens[currentTokenIndex].Lexeme;
+
+            return treeNode;
+        }
+        private TreeNode getWriteTreeNode()
+        {
+            TreeNode treeNode = new TreeNode(tokens[currentTokenIndex]);
+
+            currentTokenIndex++;
+            treeNode.Children.Add(getExp());
+
+            return treeNode;
+        }
+
+        private TreeNode getExp()
+        {
+            throw new NotImplementedException();
+        }
+        private TreeNode getSimpleExp()
+        {
+            throw new NotImplementedException();
+        }
+        private TreeNode getTerm()
+        {
+            throw new NotImplementedException();
+        }
+        private TreeNode getFactor()
+        {
+            throw new NotImplementedException();
         }
 
     }
