@@ -36,6 +36,11 @@ namespace TinyCompiler.Model
                 graph.FindNode(rootTreeNode.ID).LabelText = rootTreeNode.getDisplayLabel();
                 updateGraph(node);
             }
+            if(rootTreeNode.Children.Count == 0  && rootTreeNode.Siblings.Count == 0)
+            {
+                graph.AddNode(rootTreeNode.ID);
+                graph.FindNode(rootTreeNode.ID).LabelText = rootTreeNode.getDisplayLabel();
+            }
             graph.FindNode(rootTreeNode.ID).Attr.Shape = rootTreeNode.Shape;
             graph.FindNode(rootTreeNode.ID).Attr.FillColor = rootTreeNode.Color;
 
