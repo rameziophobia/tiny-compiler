@@ -30,8 +30,9 @@ namespace TinyCompiler.Model
             foreach (var node in rootTreeNode.Siblings)
             {
                 graph.AddEdge(rootTreeNode.ID, node.ID);
-                graph.LayerConstraints.AddSameLayerNeighbors(graph.FindNode(rootTreeNode.ID), graph.FindNode(node.ID));
-                graph.FindNode(node.ID).LabelText = node.getDisplayLabel();
+                Node graphNode = graph.FindNode(node.ID);
+                graph.LayerConstraints.AddSameLayerNeighbors(graphRootNode, graphNode);
+                graphNode.LabelText = node.getDisplayLabel();
                 graphRootNode.LabelText = rootTreeNode.getDisplayLabel();
                 updateGraph(node);
             }
