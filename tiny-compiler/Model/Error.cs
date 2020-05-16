@@ -3,24 +3,41 @@ using System.Collections.Generic;
 
 namespace TinyCompiler.Model
 {
-    static class Error
+    class Error : Exception
     {
-        private static List<String> ErrorList = null;
-        public static List<String> getErrorList()
+        private static List<Error> ErrorList = new List<Error>();
+        private Error(int lineCount, int indexInCurrentLine, string expected, string found) : base($"syntax error in line {lineCount} at {indexInCurrentLine} found '{found}', expecting a '{expected}'") { }
+        private Error(Token token, TokenType expected) : base($"Unexpected Token: {token.Lexeme}, Expected: {expected}") { }
+        public Error(Token token) : base($"Unexpected Token: {token.Lexeme}") { }
+
+        public static List<Error> getErrorList()
         {
-            if (ErrorList == null)
-                ErrorList = new List<String>();
             return ErrorList;
         }
-        public class TokenizationException : Exception
+        public static void clearErrorList()
+        {
+            ErrorList = new List<Error>();
+        }
+        public class TokenizationException : Error
         {
             public TokenizationException(int lineCount, int indexInCurrentLine, string expected, string found)
-            : base($"syntax error in line {lineCount} at {indexInCurrentLine} found '{found}', expecting a '{expected}'")
+            : base(lineCount, indexInCurrentLine, expected, found)
             {
+                ErrorList.Add(this);
             }
         }
-        //TODO add more Exception types
-        //TODO each Exception will on creation will add itself to the list <- maybe not...
-        //TODO each Excepiton will be displayed diffrently by the GUI
+        public class InvalidSyntaxException : Error
+        {
+            public InvalidSyntaxException(Token token, TokenType expected) : base(token, expected)
+            {
+                ErrorList.Add(this);
+            }
+            public InvalidSyntaxException(Token token) : base(token)
+            {
+                ErrorList.Add(this);
+            }
+        }
     }
+    //TODO add more Exception types
+    //TODO each Excepiton will be displayed diffrently by the GUI
 }

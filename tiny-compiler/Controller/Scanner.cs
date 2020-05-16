@@ -13,10 +13,8 @@ namespace TinyCompiler.Controller
         private string fileText;
         private int lineCount = 1;
         private int indexInCurrentLine = 0;
-        public List<String> Errors = Error.getErrorList();
         public List<Token> getTokens()
         {
-            Errors = new List<string>();
             List<Token> tokens = new List<Token>();
 
             Token currentToken = getSafeToken();
@@ -27,7 +25,6 @@ namespace TinyCompiler.Controller
             }
             return tokens;
         }
-
         public Token getSafeToken()
         {
             bool safe = false;
@@ -42,15 +39,13 @@ namespace TinyCompiler.Controller
                         safe = true;
                     }
                 }
-                catch (Error.TokenizationException e)
+                catch (Error.TokenizationException)
                 {
-                    Errors.Add(e.Message);
                 }
             }
 
             return t;
         }
-
         public Token getToken()
         {
             current_token = new Token();

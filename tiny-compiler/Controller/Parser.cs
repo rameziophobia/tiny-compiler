@@ -42,9 +42,16 @@ namespace TinyCompiler.Controller
             tokens.Add(endOfFile);
         }
 
-        public TreeNode parse()
+        public TreeNode parse() //if incorrect location to make the exception handling, TODO make safe parse
         {
-            return getStmtSequence();
+            try
+            {
+                return getStmtSequence();
+            }
+            catch (Error.InvalidSyntaxException)
+            {
+            }
+            return null;
         }
 
         // change return type
@@ -93,14 +100,14 @@ namespace TinyCompiler.Controller
                 case TokenType.Comment:
                     throw new NotImplementedException();
                 default:
-                    throw new InvalidSyntaxException(tokens[currentTokenIndex]);
+                    throw new Error.InvalidSyntaxException(tokens[currentTokenIndex]);
             }
         }
         private void match(TokenType expected) // todo rename
         {
             if (tokens[currentTokenIndex].Type != expected)
             {
-                throw new InvalidSyntaxException(tokens[currentTokenIndex], expected);
+                throw new Error.InvalidSyntaxException(tokens[currentTokenIndex], expected);
             }
         }
 
@@ -270,7 +277,7 @@ namespace TinyCompiler.Controller
                     match(TokenType.Float);
                     break;
                 default:
-                    throw new InvalidSyntaxException(tokens[currentTokenIndex]);
+                    throw new Error.InvalidSyntaxException(tokens[currentTokenIndex]);
             }
 
             return treeNode;

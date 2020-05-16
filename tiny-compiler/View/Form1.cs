@@ -17,66 +17,66 @@ namespace TinyCompiler
         public Form1()
         {
             temp.Lexeme = "Read X";
-            readX =  new ExpNode(temp);
+            readX = new ExpNode(temp);
             Token temp2 = new Token();
-            temp2.Lexeme = "if"; 
+            temp2.Lexeme = "if";
             TreeNode if1 = new ExpNode(temp2);
             Token temp3 = new Token();
-            temp3.Lexeme = "op (<)";  
+            temp3.Lexeme = "op (<)";
             TreeNode op1 = new StatementNode(temp3);
             Token temp4 = new Token();
-            temp4.Lexeme = "const (0)";  
+            temp4.Lexeme = "const (0)";
             TreeNode const0 = new StatementNode(temp4);
             Token temp5 = new Token();
-            temp5.Lexeme = "const (0)1";   
+            temp5.Lexeme = "const (0)1";
             TreeNode const02 = new StatementNode(temp5);
             Token temp6 = new Token();
-            temp6.Lexeme = "id (x)";   
+            temp6.Lexeme = "id (x)";
             TreeNode idX = new StatementNode(temp6);
             Token temp7 = new Token();
-            temp7.Lexeme = "id (x)";   
+            temp7.Lexeme = "id (x)";
             TreeNode idX2 = new StatementNode(temp7);
             Token temp8 = new Token();
-            temp8.Lexeme = "id (x)";   
+            temp8.Lexeme = "id (x)";
             TreeNode idX3 = new StatementNode(temp8);
             Token temp9 = new Token();
-            temp9.Lexeme = "id (x)";   
+            temp9.Lexeme = "id (x)";
             TreeNode idX4 = new StatementNode(temp9);
             Token temp10 = new Token();
-            temp10.Lexeme = "id (fact)";   
+            temp10.Lexeme = "id (fact)";
             TreeNode idFact = new StatementNode(temp10);
             Token temp11 = new Token();
-            temp11.Lexeme = "id (fact)";   
+            temp11.Lexeme = "id (fact)";
             TreeNode idFact2 = new StatementNode(temp11);
             Token temp12 = new Token();
-            temp12.Lexeme = "asssign (fact)";   
+            temp12.Lexeme = "asssign (fact)";
             TreeNode assignFact = new ExpNode(temp12);
             Token temp13 = new Token();
-            temp13.Lexeme = "asssign (fact)";   
+            temp13.Lexeme = "asssign (fact)";
             TreeNode assignFact2 = new ExpNode(temp13);
             Token temp14 = new Token();
-            temp14.Lexeme = "op (-)";   
+            temp14.Lexeme = "op (-)";
             TreeNode opMinus = new StatementNode(temp14);
             Token temp15 = new Token();
-            temp15.Lexeme = "op (-)";   
+            temp15.Lexeme = "op (-)";
             TreeNode opMinus2 = new StatementNode(temp15);
             Token temp16 = new Token();
-            temp16.Lexeme = "op (-)";   
+            temp16.Lexeme = "op (-)";
             TreeNode opMinus3 = new StatementNode(temp16);
             Token temp17 = new Token();
-            temp17.Lexeme = "asssign (X)";   
+            temp17.Lexeme = "asssign (X)";
             TreeNode assignX = new ExpNode(temp17);
             Token temp18 = new Token();
-            temp18.Lexeme = "Const (1)";   
+            temp18.Lexeme = "Const (1)";
             TreeNode const1 = new StatementNode(temp18);
             Token temp19 = new Token();
-            temp19.Lexeme = "Const (1)";   
+            temp19.Lexeme = "Const (1)";
             TreeNode const12 = new StatementNode(temp19);
             Token temp20 = new Token();
-            temp20.Lexeme = "repeat";   
+            temp20.Lexeme = "repeat";
             TreeNode repeat = new ExpNode(temp20);
             Token temp21 = new Token();
-            temp21.Lexeme = "write";   
+            temp21.Lexeme = "write";
             TreeNode write = new ExpNode(temp21);
             readX.Siblings.Add(if1);
             if1.Children.Add(op1);
@@ -147,9 +147,10 @@ namespace TinyCompiler
                 TreeText.Text = tableText;
 
                 string errorString = "";
-                foreach (string error in Error.getErrorList())
+                foreach (Error error in Error.getErrorList())
                 {
-                    errorString += error + "\n";
+                    if (error is Error.TokenizationException)
+                        errorString += error.Message + "\n";
                 }
                 if (errorString.Length != 0)
                 {
@@ -159,15 +160,32 @@ namespace TinyCompiler
                 {
                     ErrorText.Text = "All Clear!";
                 }
+                Error.clearErrorList();
             }
         }
         private void TT_button_Click(object sender, EventArgs e)
         {
             Parser parser = new Parser(new Scanner(CodeText.Text + " ").getTokens());
-
-            parserTree.makeGraph(parser.parse());
-            //parserTree.makeGraph(readX);
-            parserTree.showForm();
+            TreeNode treeNode = parser.parse();
+            if (treeNode != null)
+            {
+                parserTree.makeGraph(treeNode);
+                //parserTree.makeGraph(readX);
+                parserTree.showForm();
+            }
+            foreach (Error error in Error.getErrorList())
+            {
+                if (error is Error.TokenizationException)
+                {
+                    MessageBox.Show("Fix Syntax Errors First", "Syntax Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+                }
+                else if (error is Error.InvalidSyntaxException)
+                    MessageBox.Show(error.Message, "Parsing Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            Error.clearErrorList();
         }
         OpenFileDialog OFD_Setup()
         {
@@ -187,9 +205,6 @@ namespace TinyCompiler
         {
             Close();
         }
-
-
-
         private void button1_Click(object sender, EventArgs e)
         {
         }
