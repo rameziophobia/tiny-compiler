@@ -1,6 +1,5 @@
 ﻿using Microsoft.Msagl.Drawing;
 using Microsoft.Msagl.GraphViewerGdi;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace TinyCompiler.Model
