@@ -61,11 +61,13 @@
   <ItemGroup>
     <Compile Include="Controller\Parser.cs" />
     <Compile Include="Controller\Scanner.cs" />
+    <Compile Include="Model\Errors\InvalidSyntaxException.cs" />
+    <Compile Include="Model\Errors\TokenizationException.cs" />
     <Compile Include="Model\ExpNode.cs" />
     <Compile Include="Model\ParserTree.cs" />
     <Compile Include="Model\StatementNode.cs" />
     <Compile Include="Model\Token.cs" />
-    <Compile Include="Model\Error.cs" />
+    <Compile Include="Model\Errors\CompilationExpection.cs" />
     <Compile Include="Model\TreeNode.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

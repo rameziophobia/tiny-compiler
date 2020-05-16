@@ -4,6 +4,7 @@ using System.IO;
 using System.Windows.Forms;
 using TinyCompiler.Controller;
 using TinyCompiler.Model;
+using TinyCompiler.Model.Errors;
 
 namespace TinyCompiler
 {
@@ -59,9 +60,9 @@ namespace TinyCompiler
                 TreeText.Text = tableText;
 
                 string errorString = "";
-                foreach (Error error in Error.getErrorList())
+                foreach (CompilationExpection error in CompilationExpection.getErrorList())
                 {
-                    if (error is Error.TokenizationException)
+                    if (error is TokenizationException)
                         errorString += error.Message + "\n";
                 }
                 if (errorString.Length != 0)
@@ -72,7 +73,7 @@ namespace TinyCompiler
                 {
                     ErrorText.Text = "All Clear!";
                 }
-                Error.clearErrorList();
+                CompilationExpection.clearErrorList();
             }
         }
         private void TT_button_Click(object sender, EventArgs e)
@@ -88,21 +89,21 @@ namespace TinyCompiler
                     //parserTree.makeGraph(readX);
                     parserTree.showForm();
                 }
-                foreach (Error error in Error.getErrorList())
+                foreach (CompilationExpection error in CompilationExpection.getErrorList())
                 {
-                    if (error is Error.TokenizationException)
+                    if (error is TokenizationException)
                     {
                         MessageBox.Show("Fix Syntax Errors First", "Syntax Error",
                             MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
                     }
-                    else if (error is Error.InvalidSyntaxException)
+                    else if (error is InvalidSyntaxException)
                     {
                         MessageBox.Show(error.Message, "Parsing Error",
                             MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
-                Error.clearErrorList();
+                CompilationExpection.clearErrorList();
             }
         }
         OpenFileDialog OFD_Setup()

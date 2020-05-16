@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using TinyCompiler.Model;
+using TinyCompiler.Model.Errors;
 
 namespace TinyCompiler.Controller
 {
@@ -39,7 +40,7 @@ namespace TinyCompiler.Controller
                         safe = true;
                     }
                 }
-                catch (Error.TokenizationException)
+                catch (TokenizationException)
                 {
                 }
             }
@@ -227,7 +228,7 @@ namespace TinyCompiler.Controller
 
             if (current_state == State.Error)
             {
-                throw new Error.TokenizationException(lineCount, indexInCurrentLine, errorExpectedFound.Item1, errorExpectedFound.Item2);
+                throw new TokenizationException(lineCount, indexInCurrentLine, errorExpectedFound.Item1, errorExpectedFound.Item2);
             }
 
             current_token.Lexeme = lexeme;
@@ -300,7 +301,7 @@ namespace TinyCompiler.Controller
             }
             if (state == State.Error)
             {
-                throw new Error.TokenizationException(lineCount, indexInCurrentLine, "nothing expected", c.ToString());
+                throw new TokenizationException(lineCount, indexInCurrentLine, "nothing expected", c.ToString());
             }
             if (state != State.Start)
             {

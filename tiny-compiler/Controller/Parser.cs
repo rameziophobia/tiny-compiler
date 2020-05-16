@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TinyCompiler.Model;
+using TinyCompiler.Model.Errors;
 
 namespace TinyCompiler.Controller
 {
@@ -27,8 +27,6 @@ namespace TinyCompiler.Controller
     // todo architect the system we ay 7aga fadla 3mtn
     // ana wa5ed el task da xD
 
-
-
     class Parser
     {
         private readonly List<Token> tokens;
@@ -48,7 +46,7 @@ namespace TinyCompiler.Controller
             {
                 return getStmtSequence();
             }
-            catch (Error.InvalidSyntaxException)
+            catch (InvalidSyntaxException)
             {
             }
             return null;
@@ -98,14 +96,14 @@ namespace TinyCompiler.Controller
                 case TokenType.Id:
                     return getAssignTreeNode();
                 default:
-                    throw new Error.InvalidSyntaxException(tokens[currentTokenIndex]);
+                    throw new InvalidSyntaxException(tokens[currentTokenIndex]);
             }
         }
         private void match(TokenType expected) // todo rename
         {
             if (tokens[currentTokenIndex].Type != expected)
             {
-                throw new Error.InvalidSyntaxException(tokens[currentTokenIndex], expected);
+                throw new InvalidSyntaxException(tokens[currentTokenIndex], expected);
             }
         }
 
@@ -274,7 +272,7 @@ namespace TinyCompiler.Controller
                     match(TokenType.Float);
                     break;
                 default:
-                    throw new Error.InvalidSyntaxException(tokens[currentTokenIndex]);
+                    throw new InvalidSyntaxException(tokens[currentTokenIndex]);
             }
 
             return treeNode;
