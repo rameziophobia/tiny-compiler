@@ -97,8 +97,6 @@ namespace TinyCompiler.Controller
                     return getWriteTreeNode();
                 case TokenType.Id:
                     return getAssignTreeNode();
-                case TokenType.Comment:
-                    throw new NotImplementedException();
                 default:
                     throw new Error.InvalidSyntaxException(tokens[currentTokenIndex]);
             }
