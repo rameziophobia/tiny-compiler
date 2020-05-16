@@ -6,8 +6,8 @@ namespace TinyCompiler.Model
     {
         public ExpNode(Token token, TreeNode parent = null) : base(token, parent)
         {
-            Color = Color.Cyan;
-            Shape = Shape.Box;
+            Color = Color.LimeGreen;
+            Shape = Shape.Circle;
         }
     }
 }

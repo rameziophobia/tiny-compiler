@@ -5,8 +5,8 @@ namespace TinyCompiler.Model
     {
         public StatementNode(Token token, TreeNode parent = null) : base(token, parent)
         {
-            Color = Color.LimeGreen;
-            Shape = Shape.Circle;
+            Color = Color.Cyan;
+            Shape = Shape.Box;
         }
     }
 }
