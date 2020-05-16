@@ -249,7 +249,9 @@ namespace TinyCompiler.Controller
             {
                 case TokenType.BracketLeft:
                     match(TokenType.BracketLeft);
+                    currentTokenIndex++;
                     treeNode = getExp();
+                    currentTokenIndex++;
                     match(TokenType.BracketRight);
                     break;
 
