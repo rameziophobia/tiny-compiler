@@ -150,13 +150,12 @@ namespace TinyCompiler.Controller
         }
         private TreeNode getAssignTreeNode()
         {
-            TreeNode treeNode = new StatementNode(tokens[currentTokenIndex]);
-
-            match(TokenType.Id);
-            treeNode.ExtraText += "Assign";
+            string extraText = $"({tokens[currentTokenIndex].Lexeme})";
 
             currentTokenIndex++;
             match(TokenType.Assign);
+            TreeNode treeNode = new StatementNode(tokens[currentTokenIndex]);
+            treeNode.ExtraText += extraText;
 
             currentTokenIndex++;
             treeNode.Children.Add(getExp());
@@ -170,7 +169,7 @@ namespace TinyCompiler.Controller
 
             currentTokenIndex++;
             match(TokenType.Id);
-            treeNode.ExtraText += tokens[currentTokenIndex].Lexeme;
+            treeNode.ExtraText += $"({tokens[currentTokenIndex].Lexeme})";
 
             return treeNode;
         }

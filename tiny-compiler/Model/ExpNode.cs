@@ -9,5 +9,10 @@ namespace TinyCompiler.Model
             Color = Color.LimeGreen;
             Shape = Shape.Circle;
         }
+
+        public override string getDisplayLabel()
+        {
+            return $"{Token.Type}\n({Token.Lexeme})\n{ExtraText}";
+        }
     }
 }

@@ -28,9 +28,9 @@ namespace TinyCompiler.Model
             Token = token;
         }
 
-        public string getDisplayLabel()
+        public virtual string getDisplayLabel()
         {
-            return Token.Lexeme + "\n" + ExtraText;
+            return Token.Type + "\n" + ExtraText;
         }
 
         //public void removeChild(TreeNode childToRemove)
