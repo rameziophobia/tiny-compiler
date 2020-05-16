@@ -117,6 +117,8 @@ namespace TinyCompiler.Model
                 { "||", TokenType.BoolOR}
             };
 
+        public int lineNum { get; set; }
+
         public TokenType Type { get; set; }
         public int Value { get; set; }
         public string Lexeme { get; set; }

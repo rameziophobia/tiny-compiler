@@ -2,11 +2,11 @@
 {
     class InvalidSyntaxException : CompilationExpection
     {
-        public InvalidSyntaxException(Token token, TokenType expected) : base($"Unexpected Token: {token.Lexeme}, Expected: {expected}")
+        public InvalidSyntaxException(Token token, TokenType expected) : base($"Line: {token.lineNum} Unexpected Token: {token.Lexeme}, Expected: {expected}")
         {
             getErrorList().Add(this);
         }
-        public InvalidSyntaxException(Token token) : base($"Unexpected Token: {token.Lexeme}")
+        public InvalidSyntaxException(Token token) : base($"Line: {token.lineNum} Unexpected Token: {token.Lexeme}")
         {
             getErrorList().Add(this);
         }

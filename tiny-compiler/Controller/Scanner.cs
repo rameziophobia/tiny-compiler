@@ -236,6 +236,7 @@ namespace TinyCompiler.Controller
             {
                 setTypeIfReserved();
             }
+            current_token.lineNum = lineCount;
             return current_token;
         }
         public Scanner(string fileText)
