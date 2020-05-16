@@ -85,7 +85,7 @@ namespace TinyCompiler.Controller
                     return getReadTreeNode();
                 case TokenType.Write:
                     return getWriteTreeNode();
-                case TokenType.Assign:
+                case TokenType.Id:
                     return getAssignTreeNode();
                 case TokenType.Comment:
                     throw new NotImplementedException();
@@ -103,7 +103,7 @@ namespace TinyCompiler.Controller
 
         private TreeNode getIfTreeNode()
         {
-            TreeNode treeNode = new TreeNode(tokens[currentTokenIndex]);
+            TreeNode treeNode = new StatementNode(tokens[currentTokenIndex]);
 
             currentTokenIndex++;
             treeNode.Children.Add(getExp());
@@ -127,7 +127,7 @@ namespace TinyCompiler.Controller
 
         private TreeNode getRepeatTreeNode()
         {
-            TreeNode treeNode = new TreeNode(tokens[currentTokenIndex]);
+            TreeNode treeNode = new StatementNode(tokens[currentTokenIndex]);
 
             currentTokenIndex++;
             treeNode.Children.Add(getStmtSequence());
@@ -142,10 +142,10 @@ namespace TinyCompiler.Controller
         }
         private TreeNode getAssignTreeNode()
         {
-            TreeNode treeNode = new TreeNode(tokens[currentTokenIndex]);
+            TreeNode treeNode = new StatementNode(tokens[currentTokenIndex]);
 
             match(TokenType.Id);
-            treeNode.ExtraText += tokens[currentTokenIndex].Lexeme;
+            treeNode.ExtraText += "Assign";
 
             currentTokenIndex++;
             match(TokenType.Assign);
@@ -158,7 +158,7 @@ namespace TinyCompiler.Controller
 
         private TreeNode getReadTreeNode()
         {
-            TreeNode treeNode = new TreeNode(tokens[currentTokenIndex]);
+            TreeNode treeNode = new StatementNode(tokens[currentTokenIndex]);
 
             currentTokenIndex++;
             match(TokenType.Id);
@@ -168,7 +168,7 @@ namespace TinyCompiler.Controller
         }
         private TreeNode getWriteTreeNode()
         {
-            TreeNode treeNode = new TreeNode(tokens[currentTokenIndex]);
+            TreeNode treeNode = new StatementNode(tokens[currentTokenIndex]);
 
             currentTokenIndex++;
             treeNode.Children.Add(getExp());
@@ -178,20 +178,98 @@ namespace TinyCompiler.Controller
 
         private TreeNode getExp()
         {
-            throw new NotImplementedException();
+            TreeNode treeNode = getSimpleExp();
+            TreeNode tempNode = treeNode;
+
+            currentTokenIndex++;
+            if (tokens[currentTokenIndex].Type == TokenType.LessThan ||
+                tokens[currentTokenIndex].Type == TokenType.GreaterThan ||
+                tokens[currentTokenIndex].Type == TokenType.IsEqual ||
+                tokens[currentTokenIndex].Type == TokenType.IsNotEqual)
+            {
+                match(tokens[currentTokenIndex].Type);
+                treeNode = new ExpNode(tokens[currentTokenIndex]);
+                treeNode.Children.Add(tempNode);
+                treeNode.Children.Add(getSimpleExp());
+            }
+
+            return treeNode;
         }
+
         private TreeNode getSimpleExp()
         {
-            throw new NotImplementedException();
+            TreeNode treeNode = new ExpNode(tokens[currentTokenIndex]);
+            TreeNode tempNode = treeNode;
+
+            currentTokenIndex++;
+            while (tokens[currentTokenIndex].Type == TokenType.Plus ||
+                tokens[currentTokenIndex].Type == TokenType.Minus)
+            {
+                match(tokens[currentTokenIndex].Type);
+
+                treeNode = new ExpNode(tokens[currentTokenIndex]);
+                treeNode.Children.Add(tempNode);
+                treeNode.Children.Add(getTerm());
+                tempNode = treeNode; // gamed
+                currentTokenIndex++;
+            }
+
+            return treeNode;
         }
+
         private TreeNode getTerm()
         {
-            throw new NotImplementedException();
+            TreeNode treeNode = new ExpNode(tokens[currentTokenIndex]);
+            TreeNode tempNode = treeNode;
+
+            currentTokenIndex++;
+            while (tokens[currentTokenIndex].Type == TokenType.Mult ||
+                tokens[currentTokenIndex].Type == TokenType.Division)
+            {
+                match(tokens[currentTokenIndex].Type);
+
+                treeNode = new ExpNode(tokens[currentTokenIndex]);
+                treeNode.Children.Add(tempNode);
+                treeNode.Children.Add(getFactor());
+                tempNode = treeNode; // gamed
+                currentTokenIndex++;
+            }
+
+            return treeNode;
         }
         private TreeNode getFactor()
         {
-            throw new NotImplementedException();
-        }
+            TreeNode treeNode;
+            switch (tokens[currentTokenIndex].Type)
+            {
+                case TokenType.BracketLeft:
+                    match(TokenType.BracketLeft);
+                    treeNode = getExp();
+                    match(TokenType.BracketRight);
+                    break;
 
+                case TokenType.Id:
+                    treeNode = new ExpNode(tokens[currentTokenIndex]);
+                    treeNode.ExtraText += tokens[currentTokenIndex].Lexeme;
+                    match(TokenType.Id);
+                    break;
+
+                case TokenType.NumInt:
+                    treeNode = new ExpNode(tokens[currentTokenIndex]);
+                    treeNode.ExtraText += tokens[currentTokenIndex].Lexeme;
+                    match(TokenType.NumInt);
+                    break;
+
+                case TokenType.NumFloat:
+                    treeNode = new ExpNode(tokens[currentTokenIndex]);
+                    treeNode.ExtraText += tokens[currentTokenIndex].Lexeme;
+                    match(TokenType.NumFloat);
+                    break;
+                default:
+                    throw new InvalidSyntaxException(tokens[currentTokenIndex]);
+            }
+
+            return treeNode;
+        }
     }
 }
