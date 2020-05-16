@@ -77,30 +77,33 @@ namespace TinyCompiler
         }
         private void TT_button_Click(object sender, EventArgs e)
         {
-            Parser parser = new Parser(new Scanner(CodeText.Text + " ").getTokens());
-            ParserTree parserTree = new ParserTree();
-            Model.TreeNode treeNode = parser.parse();
-            if (treeNode != null)
+            if (CodeText.Text != "")
             {
-                parserTree.makeGraph(treeNode);
-                //parserTree.makeGraph(readX);
-                parserTree.showForm();
-            }
-            foreach (Error error in Error.getErrorList())
-            {
-                if (error is Error.TokenizationException)
+                Parser parser = new Parser(new Scanner(CodeText.Text + " ").getTokens());
+                ParserTree parserTree = new ParserTree();
+                Model.TreeNode treeNode = parser.parse();
+                if (treeNode != null)
                 {
-                    MessageBox.Show("Fix Syntax Errors First", "Syntax Error",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    break;
+                    parserTree.makeGraph(treeNode);
+                    //parserTree.makeGraph(readX);
+                    parserTree.showForm();
                 }
-                else if (error is Error.InvalidSyntaxException)
+                foreach (Error error in Error.getErrorList())
                 {
-                    MessageBox.Show(error.Message, "Parsing Error",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    if (error is Error.TokenizationException)
+                    {
+                        MessageBox.Show("Fix Syntax Errors First", "Syntax Error",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    }
+                    else if (error is Error.InvalidSyntaxException)
+                    {
+                        MessageBox.Show(error.Message, "Parsing Error",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
+                Error.clearErrorList();
             }
-            Error.clearErrorList();
         }
         OpenFileDialog OFD_Setup()
         {
