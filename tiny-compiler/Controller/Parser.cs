@@ -58,9 +58,14 @@ namespace TinyCompiler.Controller
             TreeNode rootNode = getStatement();
             TreeNode currentNode = rootNode;
 
-            currentTokenIndex++;
-            while (tokens[currentTokenIndex].Type != TokenType.EndOfFile)
+
+            while (tokens[currentTokenIndex + 1].Type != TokenType.EndOfFile &&
+                tokens[currentTokenIndex + 1].Type != TokenType.End &&
+                tokens[currentTokenIndex + 1].Type != TokenType.Else &&
+                tokens[currentTokenIndex + 1].Type != TokenType.Until
+                )
             {
+                currentTokenIndex++;
                 match(TokenType.SemiColon);
 
                 currentTokenIndex++;
@@ -68,8 +73,6 @@ namespace TinyCompiler.Controller
 
                 currentNode.Siblings.Add(sibling);
                 currentNode = sibling;
-
-                currentTokenIndex++;
             }
             return rootNode;
         }
@@ -181,15 +184,17 @@ namespace TinyCompiler.Controller
             TreeNode treeNode = getSimpleExp();
             TreeNode tempNode = treeNode;
 
-            currentTokenIndex++;
-            if (tokens[currentTokenIndex].Type == TokenType.LessThan ||
-                tokens[currentTokenIndex].Type == TokenType.GreaterThan ||
-                tokens[currentTokenIndex].Type == TokenType.IsEqual ||
-                tokens[currentTokenIndex].Type == TokenType.IsNotEqual)
+
+            if (tokens[currentTokenIndex + 1].Type == TokenType.LessThan ||
+                tokens[currentTokenIndex + 1].Type == TokenType.GreaterThan ||
+                tokens[currentTokenIndex + 1].Type == TokenType.IsEqual ||
+                tokens[currentTokenIndex + 1].Type == TokenType.IsNotEqual)
             {
+                currentTokenIndex++;
                 match(tokens[currentTokenIndex].Type);
                 treeNode = new ExpNode(tokens[currentTokenIndex]);
                 treeNode.Children.Add(tempNode);
+                currentTokenIndex++;
                 treeNode.Children.Add(getSimpleExp());
             }
 
@@ -198,20 +203,20 @@ namespace TinyCompiler.Controller
 
         private TreeNode getSimpleExp()
         {
-            TreeNode treeNode = new ExpNode(tokens[currentTokenIndex]);
+            TreeNode treeNode = getTerm();
             TreeNode tempNode = treeNode;
 
-            currentTokenIndex++;
-            while (tokens[currentTokenIndex].Type == TokenType.Plus ||
-                tokens[currentTokenIndex].Type == TokenType.Minus)
+            while (tokens[currentTokenIndex + 1].Type == TokenType.Plus ||
+                tokens[currentTokenIndex + 1].Type == TokenType.Minus)
             {
+                currentTokenIndex++;
                 match(tokens[currentTokenIndex].Type);
 
                 treeNode = new ExpNode(tokens[currentTokenIndex]);
                 treeNode.Children.Add(tempNode);
+                currentTokenIndex++;
                 treeNode.Children.Add(getTerm());
                 tempNode = treeNode; // gamed
-                currentTokenIndex++;
             }
 
             return treeNode;
@@ -219,20 +224,20 @@ namespace TinyCompiler.Controller
 
         private TreeNode getTerm()
         {
-            TreeNode treeNode = new ExpNode(tokens[currentTokenIndex]);
+            TreeNode treeNode = getFactor();
             TreeNode tempNode = treeNode;
 
-            currentTokenIndex++;
-            while (tokens[currentTokenIndex].Type == TokenType.Mult ||
-                tokens[currentTokenIndex].Type == TokenType.Division)
+            while (tokens[currentTokenIndex + 1].Type == TokenType.Mult ||
+                tokens[currentTokenIndex + 1].Type == TokenType.Division)
             {
+                currentTokenIndex++;
                 match(tokens[currentTokenIndex].Type);
 
                 treeNode = new ExpNode(tokens[currentTokenIndex]);
                 treeNode.Children.Add(tempNode);
+                currentTokenIndex++;
                 treeNode.Children.Add(getFactor());
                 tempNode = treeNode; // gamed
-                currentTokenIndex++;
             }
 
             return treeNode;
@@ -250,20 +255,17 @@ namespace TinyCompiler.Controller
 
                 case TokenType.Id:
                     treeNode = new ExpNode(tokens[currentTokenIndex]);
-                    treeNode.ExtraText += tokens[currentTokenIndex].Lexeme;
                     match(TokenType.Id);
                     break;
 
-                case TokenType.NumInt:
+                case TokenType.Integer:
                     treeNode = new ExpNode(tokens[currentTokenIndex]);
-                    treeNode.ExtraText += tokens[currentTokenIndex].Lexeme;
-                    match(TokenType.NumInt);
+                    match(TokenType.Integer);
                     break;
 
-                case TokenType.NumFloat:
+                case TokenType.Float:
                     treeNode = new ExpNode(tokens[currentTokenIndex]);
-                    treeNode.ExtraText += tokens[currentTokenIndex].Lexeme;
-                    match(TokenType.NumFloat);
+                    match(TokenType.Float);
                     break;
                 default:
                     throw new InvalidSyntaxException(tokens[currentTokenIndex]);

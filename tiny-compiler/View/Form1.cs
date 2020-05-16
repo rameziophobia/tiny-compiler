@@ -163,9 +163,10 @@ namespace TinyCompiler
         }
         private void TT_button_Click(object sender, EventArgs e)
         {
-/*            Parser parser = new Parser(new Scanner(CodeText.Text + " ").getTokens());*/
+            Parser parser = new Parser(new Scanner(CodeText.Text + " ").getTokens());
 
-            parserTree.makeGraph(readX);
+            parserTree.makeGraph(parser.parse());
+            //parserTree.makeGraph(readX);
             parserTree.showForm();
         }
         OpenFileDialog OFD_Setup()
