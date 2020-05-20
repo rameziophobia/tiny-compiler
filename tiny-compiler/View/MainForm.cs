@@ -1,15 +1,16 @@
 ﻿using System;
+using System.CodeDom.Compiler;
 using System.IO;
 using System.Windows.Forms;
 using TinyCompiler.Controller;
 using TinyCompiler.Model;
-using TinyCompiler.View;
+using TinyCompiler.Model.Errors;
 
 namespace TinyCompiler
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
         }
@@ -45,26 +46,26 @@ namespace TinyCompiler
         }
         private void LA_button_Click(object sender, EventArgs e)
         {
-            if(CodeText.Text != "")
+            if (CodeText.Text != "")
             {
                 Scanner scanner = new Scanner(CodeText.Text + " ");
                 var tokens = scanner.getTokens();
                 string tableText = "";
-                foreach(Token token in tokens)
+                foreach (Token token in tokens)
                 {
-                    tableText += token.Lexeme + "\t\t\t\t" + token.Type.ToString() + "\n";
+                    tableText += token.Lexeme + "\t\t\t\t\t" + token.Type.ToString() + "\n";
                 }
-                //tableForm.SetTableText(tableText);
-                //tableForm.Show();
+
                 CodePanel.Visible = false;
                 TreeText.Text = tableText;
 
                 string errorString = "";
-                foreach(string error in Error.getErrorList())
+                foreach (CompilationExpection error in CompilationExpection.getErrorList())
                 {
-                    errorString += error + "\n";
+                    if (error is TokenizationException)
+                        errorString += error.Message + "\n";
                 }
-                if(errorString.Length != 0)
+                if (errorString.Length != 0)
                 {
                     ErrorText.Text = errorString;
                 }
@@ -72,10 +73,38 @@ namespace TinyCompiler
                 {
                     ErrorText.Text = "All Clear!";
                 }
+                CompilationExpection.clearErrorList();
             }
         }
         private void TT_button_Click(object sender, EventArgs e)
         {
+            if (CodeText.Text != "")
+            {
+                Parser parser = new Parser(new Scanner(CodeText.Text + " ").getTokens());
+                ParserTree parserTree = new ParserTree();
+                Model.TreeNode treeNode = parser.parse();
+                if (treeNode != null)
+                {
+                    parserTree.makeGraph(treeNode);
+                    //parserTree.makeGraph(readX);
+                    parserTree.showForm();
+                }
+                foreach (CompilationExpection error in CompilationExpection.getErrorList())
+                {
+                    if (error is TokenizationException)
+                    {
+                        MessageBox.Show("Fix Syntax Errors First", "Syntax Error",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    }
+                    else if (error is InvalidSyntaxException)
+                    {
+                        MessageBox.Show(error.Message, "Parsing Error",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                CompilationExpection.clearErrorList();
+            }
         }
         OpenFileDialog OFD_Setup()
         {

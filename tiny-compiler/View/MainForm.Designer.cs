@@ -1,6 +1,6 @@
 ﻿namespace TinyCompiler
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -84,7 +84,7 @@
             // 
             this.MainContainer.Panel2.Controls.Add(this.SubContainer);
             this.MainContainer.Size = new System.Drawing.Size(827, 553);
-            this.MainContainer.SplitterDistance = 234;
+            this.MainContainer.SplitterDistance = 233;
             this.MainContainer.TabIndex = 0;
             this.MainContainer.TabStop = false;
             // 
@@ -99,9 +99,10 @@
             this.MainMenu.Controls.Add(this.Exit_button);
             this.MainMenu.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainMenu.Location = new System.Drawing.Point(0, 0);
+            this.MainMenu.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MainMenu.Name = "MainMenu";
             this.MainMenu.Padding = new System.Windows.Forms.Padding(5, 10, 0, 0);
-            this.MainMenu.Size = new System.Drawing.Size(234, 553);
+            this.MainMenu.Size = new System.Drawing.Size(233, 553);
             this.MainMenu.TabIndex = 0;
             // 
             // OpenFile_button
@@ -185,7 +186,7 @@
             this.TT_button.Name = "TT_button";
             this.TT_button.Size = new System.Drawing.Size(215, 78);
             this.TT_button.TabIndex = 5;
-            this.TT_button.Text = "&Token Tree";
+            this.TT_button.Text = "&Syntax Tree";
             this.TT_button.UseVisualStyleBackColor = false;
             this.TT_button.Click += new System.EventHandler(this.TT_button_Click);
             // 
@@ -206,6 +207,7 @@
             this.SubContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.SubContainer.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
             this.SubContainer.Location = new System.Drawing.Point(0, 0);
+            this.SubContainer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.SubContainer.Name = "SubContainer";
             this.SubContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -216,8 +218,8 @@
             // SubContainer.Panel2
             // 
             this.SubContainer.Panel2.Controls.Add(this.ErrorText);
-            this.SubContainer.Size = new System.Drawing.Size(589, 553);
-            this.SubContainer.SplitterDistance = 421;
+            this.SubContainer.Size = new System.Drawing.Size(590, 553);
+            this.SubContainer.SplitterDistance = 425;
             this.SubContainer.TabIndex = 0;
             // 
             // TreePanel
@@ -226,8 +228,9 @@
             this.TreePanel.Controls.Add(this.TreeText);
             this.TreePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TreePanel.Location = new System.Drawing.Point(0, 0);
+            this.TreePanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.TreePanel.Name = "TreePanel";
-            this.TreePanel.Size = new System.Drawing.Size(589, 421);
+            this.TreePanel.Size = new System.Drawing.Size(590, 425);
             this.TreePanel.TabIndex = 0;
             // 
             // CodePanel
@@ -235,8 +238,9 @@
             this.CodePanel.Controls.Add(this.CodeText);
             this.CodePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CodePanel.Location = new System.Drawing.Point(0, 0);
+            this.CodePanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.CodePanel.Name = "CodePanel";
-            this.CodePanel.Size = new System.Drawing.Size(589, 421);
+            this.CodePanel.Size = new System.Drawing.Size(590, 425);
             this.CodePanel.TabIndex = 1;
             // 
             // CodeText
@@ -249,7 +253,7 @@
             this.CodeText.Location = new System.Drawing.Point(0, 0);
             this.CodeText.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.CodeText.Name = "CodeText";
-            this.CodeText.Size = new System.Drawing.Size(589, 421);
+            this.CodeText.Size = new System.Drawing.Size(590, 425);
             this.CodeText.TabIndex = 0;
             this.CodeText.TabStop = false;
             this.CodeText.Text = "";
@@ -261,9 +265,10 @@
             this.TreeText.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F);
             this.TreeText.ForeColor = System.Drawing.Color.White;
             this.TreeText.Location = new System.Drawing.Point(0, 0);
+            this.TreeText.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.TreeText.Name = "TreeText";
             this.TreeText.ReadOnly = true;
-            this.TreeText.Size = new System.Drawing.Size(589, 421);
+            this.TreeText.Size = new System.Drawing.Size(590, 425);
             this.TreeText.TabIndex = 0;
             this.TreeText.TabStop = false;
             this.TreeText.Text = "";
@@ -279,7 +284,7 @@
             this.ErrorText.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ErrorText.Name = "ErrorText";
             this.ErrorText.ReadOnly = true;
-            this.ErrorText.Size = new System.Drawing.Size(589, 128);
+            this.ErrorText.Size = new System.Drawing.Size(590, 124);
             this.ErrorText.TabIndex = 0;
             this.ErrorText.TabStop = false;
             this.ErrorText.Text = "All Clear!";

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using TinyCompiler.Model;
+using TinyCompiler.Model.Errors;
 
 namespace TinyCompiler.Controller
 {
@@ -13,10 +14,8 @@ namespace TinyCompiler.Controller
         private string fileText;
         private int lineCount = 1;
         private int indexInCurrentLine = 0;
-        public List<String> Errors = Error.getErrorList();
         public List<Token> getTokens()
         {
-            Errors = new List<string>();
             List<Token> tokens = new List<Token>();
 
             Token currentToken = getSafeToken();
@@ -27,7 +26,6 @@ namespace TinyCompiler.Controller
             }
             return tokens;
         }
-
         public Token getSafeToken()
         {
             bool safe = false;
@@ -42,15 +40,13 @@ namespace TinyCompiler.Controller
                         safe = true;
                     }
                 }
-                catch (Error.TokenizationException e)
+                catch (TokenizationException)
                 {
-                    Errors.Add(e.Message);
                 }
             }
 
             return t;
         }
-
         public Token getToken()
         {
             current_token = new Token();
@@ -232,7 +228,7 @@ namespace TinyCompiler.Controller
 
             if (current_state == State.Error)
             {
-                throw new Error.TokenizationException(lineCount, indexInCurrentLine, errorExpectedFound.Item1, errorExpectedFound.Item2);
+                throw new TokenizationException(lineCount, indexInCurrentLine, errorExpectedFound.Item1, errorExpectedFound.Item2);
             }
 
             current_token.Lexeme = lexeme;
@@ -240,6 +236,7 @@ namespace TinyCompiler.Controller
             {
                 setTypeIfReserved();
             }
+            current_token.lineNum = lineCount;
             return current_token;
         }
         public Scanner(string fileText)
@@ -305,7 +302,7 @@ namespace TinyCompiler.Controller
             }
             if (state == State.Error)
             {
-                throw new Error.TokenizationException(lineCount, indexInCurrentLine, "nothing expected", c.ToString());
+                throw new TokenizationException(lineCount, indexInCurrentLine, "nothing expected", c.ToString());
             }
             if (state != State.Start)
             {
