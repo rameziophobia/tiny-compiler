@@ -72,7 +72,7 @@
             this.MainContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainContainer.IsSplitterFixed = true;
             this.MainContainer.Location = new System.Drawing.Point(0, 0);
-            this.MainContainer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.MainContainer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.MainContainer.Name = "MainContainer";
             // 
             // MainContainer.Panel1
@@ -83,8 +83,9 @@
             // MainContainer.Panel2
             // 
             this.MainContainer.Panel2.Controls.Add(this.SubContainer);
-            this.MainContainer.Size = new System.Drawing.Size(827, 553);
-            this.MainContainer.SplitterDistance = 233;
+            this.MainContainer.Size = new System.Drawing.Size(620, 449);
+            this.MainContainer.SplitterDistance = 174;
+            this.MainContainer.SplitterWidth = 3;
             this.MainContainer.TabIndex = 0;
             this.MainContainer.TabStop = false;
             // 
@@ -99,10 +100,10 @@
             this.MainMenu.Controls.Add(this.Exit_button);
             this.MainMenu.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainMenu.Location = new System.Drawing.Point(0, 0);
-            this.MainMenu.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.MainMenu.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.MainMenu.Name = "MainMenu";
-            this.MainMenu.Padding = new System.Windows.Forms.Padding(5, 10, 0, 0);
-            this.MainMenu.Size = new System.Drawing.Size(233, 553);
+            this.MainMenu.Padding = new System.Windows.Forms.Padding(4, 8, 0, 0);
+            this.MainMenu.Size = new System.Drawing.Size(174, 449);
             this.MainMenu.TabIndex = 0;
             // 
             // OpenFile_button
@@ -113,10 +114,10 @@
             this.OpenFile_button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.OpenFile_button.FlatAppearance.BorderColor = System.Drawing.Color.Red;
             this.OpenFile_button.FlatAppearance.BorderSize = 0;
-            this.OpenFile_button.Location = new System.Drawing.Point(8, 12);
-            this.OpenFile_button.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.OpenFile_button.Location = new System.Drawing.Point(6, 10);
+            this.OpenFile_button.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.OpenFile_button.Name = "OpenFile_button";
-            this.OpenFile_button.Size = new System.Drawing.Size(215, 78);
+            this.OpenFile_button.Size = new System.Drawing.Size(161, 63);
             this.OpenFile_button.TabIndex = 1;
             this.OpenFile_button.Text = "&Open File";
             this.OpenFile_button.UseVisualStyleBackColor = false;
@@ -130,10 +131,10 @@
             this.Edit_button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.Edit_button.FlatAppearance.BorderColor = System.Drawing.Color.Red;
             this.Edit_button.FlatAppearance.BorderSize = 0;
-            this.Edit_button.Location = new System.Drawing.Point(8, 94);
-            this.Edit_button.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Edit_button.Location = new System.Drawing.Point(6, 77);
+            this.Edit_button.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Edit_button.Name = "Edit_button";
-            this.Edit_button.Size = new System.Drawing.Size(215, 78);
+            this.Edit_button.Size = new System.Drawing.Size(161, 63);
             this.Edit_button.TabIndex = 2;
             this.Edit_button.Text = "&Edit";
             this.Edit_button.UseVisualStyleBackColor = false;
@@ -147,10 +148,10 @@
             this.Save_button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.Save_button.FlatAppearance.BorderColor = System.Drawing.Color.Red;
             this.Save_button.FlatAppearance.BorderSize = 0;
-            this.Save_button.Location = new System.Drawing.Point(8, 176);
-            this.Save_button.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Save_button.Location = new System.Drawing.Point(6, 144);
+            this.Save_button.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Save_button.Name = "Save_button";
-            this.Save_button.Size = new System.Drawing.Size(215, 78);
+            this.Save_button.Size = new System.Drawing.Size(161, 63);
             this.Save_button.TabIndex = 3;
             this.Save_button.Text = "&Save As";
             this.Save_button.UseVisualStyleBackColor = false;
@@ -164,10 +165,10 @@
             this.LA_button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.LA_button.FlatAppearance.BorderColor = System.Drawing.Color.Red;
             this.LA_button.FlatAppearance.BorderSize = 0;
-            this.LA_button.Location = new System.Drawing.Point(8, 258);
-            this.LA_button.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.LA_button.Location = new System.Drawing.Point(6, 211);
+            this.LA_button.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.LA_button.Name = "LA_button";
-            this.LA_button.Size = new System.Drawing.Size(215, 78);
+            this.LA_button.Size = new System.Drawing.Size(161, 63);
             this.LA_button.TabIndex = 4;
             this.LA_button.Text = "Lexeme &Analysis";
             this.LA_button.UseVisualStyleBackColor = false;
@@ -181,10 +182,10 @@
             this.TT_button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.TT_button.FlatAppearance.BorderColor = System.Drawing.Color.Red;
             this.TT_button.FlatAppearance.BorderSize = 0;
-            this.TT_button.Location = new System.Drawing.Point(8, 340);
-            this.TT_button.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.TT_button.Location = new System.Drawing.Point(6, 278);
+            this.TT_button.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.TT_button.Name = "TT_button";
-            this.TT_button.Size = new System.Drawing.Size(215, 78);
+            this.TT_button.Size = new System.Drawing.Size(161, 63);
             this.TT_button.TabIndex = 5;
             this.TT_button.Text = "&Syntax Tree";
             this.TT_button.UseVisualStyleBackColor = false;
@@ -193,10 +194,10 @@
             // Exit_button
             // 
             this.Exit_button.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.Exit_button.Location = new System.Drawing.Point(8, 422);
-            this.Exit_button.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Exit_button.Location = new System.Drawing.Point(6, 345);
+            this.Exit_button.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Exit_button.Name = "Exit_button";
-            this.Exit_button.Size = new System.Drawing.Size(69, 42);
+            this.Exit_button.Size = new System.Drawing.Size(52, 34);
             this.Exit_button.TabIndex = 7;
             this.Exit_button.Text = "E&xit";
             this.Exit_button.UseVisualStyleBackColor = false;
@@ -207,7 +208,7 @@
             this.SubContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.SubContainer.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
             this.SubContainer.Location = new System.Drawing.Point(0, 0);
-            this.SubContainer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.SubContainer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.SubContainer.Name = "SubContainer";
             this.SubContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -218,8 +219,9 @@
             // SubContainer.Panel2
             // 
             this.SubContainer.Panel2.Controls.Add(this.ErrorText);
-            this.SubContainer.Size = new System.Drawing.Size(590, 553);
-            this.SubContainer.SplitterDistance = 425;
+            this.SubContainer.Size = new System.Drawing.Size(443, 449);
+            this.SubContainer.SplitterDistance = 322;
+            this.SubContainer.SplitterWidth = 3;
             this.SubContainer.TabIndex = 0;
             // 
             // TreePanel
@@ -228,9 +230,9 @@
             this.TreePanel.Controls.Add(this.TreeText);
             this.TreePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TreePanel.Location = new System.Drawing.Point(0, 0);
-            this.TreePanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.TreePanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.TreePanel.Name = "TreePanel";
-            this.TreePanel.Size = new System.Drawing.Size(590, 425);
+            this.TreePanel.Size = new System.Drawing.Size(443, 322);
             this.TreePanel.TabIndex = 0;
             // 
             // CodePanel
@@ -238,22 +240,22 @@
             this.CodePanel.Controls.Add(this.CodeText);
             this.CodePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CodePanel.Location = new System.Drawing.Point(0, 0);
-            this.CodePanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.CodePanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.CodePanel.Name = "CodePanel";
-            this.CodePanel.Size = new System.Drawing.Size(590, 425);
+            this.CodePanel.Size = new System.Drawing.Size(443, 322);
             this.CodePanel.TabIndex = 1;
             // 
             // CodeText
             // 
             this.CodeText.AcceptsTab = true;
-            this.CodeText.BackColor = System.Drawing.Color.Black;
+            this.CodeText.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.CodeText.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CodeText.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CodeText.ForeColor = System.Drawing.Color.White;
             this.CodeText.Location = new System.Drawing.Point(0, 0);
-            this.CodeText.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.CodeText.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.CodeText.Name = "CodeText";
-            this.CodeText.Size = new System.Drawing.Size(590, 425);
+            this.CodeText.Size = new System.Drawing.Size(443, 322);
             this.CodeText.TabIndex = 0;
             this.CodeText.TabStop = false;
             this.CodeText.Text = "";
@@ -265,10 +267,10 @@
             this.TreeText.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F);
             this.TreeText.ForeColor = System.Drawing.Color.White;
             this.TreeText.Location = new System.Drawing.Point(0, 0);
-            this.TreeText.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.TreeText.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.TreeText.Name = "TreeText";
             this.TreeText.ReadOnly = true;
-            this.TreeText.Size = new System.Drawing.Size(590, 425);
+            this.TreeText.Size = new System.Drawing.Size(443, 322);
             this.TreeText.TabIndex = 0;
             this.TreeText.TabStop = false;
             this.TreeText.Text = "";
@@ -281,25 +283,25 @@
             this.ErrorText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ErrorText.ForeColor = System.Drawing.Color.Crimson;
             this.ErrorText.Location = new System.Drawing.Point(0, 0);
-            this.ErrorText.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ErrorText.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.ErrorText.Name = "ErrorText";
             this.ErrorText.ReadOnly = true;
-            this.ErrorText.Size = new System.Drawing.Size(590, 124);
+            this.ErrorText.Size = new System.Drawing.Size(443, 124);
             this.ErrorText.TabIndex = 0;
             this.ErrorText.TabStop = false;
             this.ErrorText.Text = "All Clear!";
             // 
-            // Form1
+            // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(827, 553);
+            this.ClientSize = new System.Drawing.Size(620, 449);
             this.Controls.Add(this.MainContainer);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.MaximizeBox = false;
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.Text = "Compiler";
             this.MainContainer.Panel1.ResumeLayout(false);
             this.MainContainer.Panel2.ResumeLayout(false);
