@@ -16,6 +16,4 @@ namespace TinyCompiler.Model.Errors
             ErrorList = new List<CompilationExpection>();
         }
     }
-    //TODO add more Exception types
-    //TODO each Excepiton will be displayed diffrently by the GUI
 }

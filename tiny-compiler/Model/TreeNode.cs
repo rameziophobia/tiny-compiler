@@ -32,22 +32,5 @@ namespace TinyCompiler.Model
         {
             return Token.Type + "\n" + ExtraText;
         }
-
-        //public void removeChild(TreeNode childToRemove)
-        //{
-        //    TreeNode removedNode = null;
-        //    foreach (var child in Children)
-        //    {
-        //        if (child.Name == childToRemove.Name)
-        //        {
-        //            removedNode = child;
-        //        }
-        //    }
-        //    if (removedNode != null)
-        //    {
-        //        removedNode.Parent = null;
-        //        Children.Remove(removedNode);
-        //    }
-        //}
     }
 }

@@ -86,7 +86,6 @@ namespace TinyCompiler
                 if (treeNode != null)
                 {
                     parserTree.makeGraph(treeNode);
-                    //parserTree.makeGraph(readX);
                     parserTree.showForm();
                 }
                 foreach (CompilationExpection error in CompilationExpection.getErrorList())

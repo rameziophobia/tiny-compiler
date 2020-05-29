@@ -1,119 +1,44 @@
 ﻿using System.Collections.Generic;
 
-enum TokenType
-{
-    Id,
-    EndOfFile,
-    Error,
-    NumInt,
-    NumFloat,
-
-    //reserved words
-    If,
-    Then,
-    Else,
-    ElseIf,
-    End,
-    Repeat,
-    Until,
-    Read,
-    Write,
-    Return,
-    EndLine,
-
-    // data type
-    String,
-    Integer,
-    Float,
-
-    //conditional operators
-    LessThan,
-    GreaterThan,
-    IsEqual,
-    IsNotEqual,
-
-    //arithmetic operators
-    Plus,
-    Minus,
-    Mult,
-    Division,
-
-    Comma,
-    BracketLeft,
-    BracketRight,
-    SemiColon,
-
-    //todo boolean operators 
-    BoolOR,
-    BoolAnd,
-
-    Assign, //todo
-    BraceLeft,
-    BraceRight,
-    Comment,
-    StringType,
-    IntegerType,
-    FloatType
-}
-
-enum State
-{
-    Identifier,
-    Assignment,
-    InOR,
-    InAnd,
-    InNotEqual,
-    Int,
-    Float,
-    String,
-    Start,
-    Done,
-    InComment,
-    InSlash,
-    EndingComment,
-    Error,
-    intToFloat
-}
-
 namespace TinyCompiler.Model
 {
     class Token
     {
         public readonly static Dictionary<string, TokenType> RESERVED_WORDS =
             new Dictionary<string, TokenType>{
-                { "if" , TokenType.If},
-                { "then" , TokenType.Then},
-                { "else" , TokenType.Else},
-                { "elseif" , TokenType.ElseIf},
-                { "end" , TokenType.End},
-                { "repeat" , TokenType.Repeat},
                 { "until" , TokenType.Until},
                 { "return" , TokenType.Return},
+                { "then" , TokenType.Then},
+                { "if" , TokenType.If},
+                { "repeat" , TokenType.Repeat},
                 { "endl" , TokenType.EndLine},
+                { "float" , TokenType.FloatType},
                 { "read" , TokenType.Read},
                 { "write" , TokenType.Write},
                 { "string" , TokenType.StringType},
                 { "int" , TokenType.IntegerType},
-                { "float" , TokenType.FloatType}
+                { "end" , TokenType.End},
+                { "else" , TokenType.Else},
+                { "elseif" , TokenType.ElseIf}
             };
 
         public readonly static Dictionary<string, TokenType> SPECIAL_SYMBOLS =
             new Dictionary<string, TokenType>{
+                { "(", TokenType.BracketLeft},
+                { ")", TokenType.BracketRight},
+                { "+", TokenType.Plus},
                 { "=", TokenType.IsEqual},
                 { "<", TokenType.LessThan},
-                { ">", TokenType.GreaterThan},
-                { "+", TokenType.Plus},
-                { "-", TokenType.Minus},
-                { "*", TokenType.Mult},
-                { "/", TokenType.Division},
+                { "&&", TokenType.BoolAnd},
                 { ",", TokenType.Comma},
                 { "{", TokenType.BraceLeft},
                 { "}", TokenType.BraceRight},
-                { "(", TokenType.BracketLeft},
-                { ")", TokenType.BracketRight},
                 { ";", TokenType.SemiColon},
+                { ">", TokenType.GreaterThan},
                 { "<>", TokenType.IsNotEqual},
-                { "&&", TokenType.BoolAnd},
+                { "-", TokenType.Minus},
+                { "*", TokenType.Mult},
+                { "/", TokenType.Division},
                 { "||", TokenType.BoolOR}
             };
 
@@ -124,3 +49,68 @@ namespace TinyCompiler.Model
         public string Lexeme { get; set; }
     }
 }
+
+
+enum TokenType
+{
+    Comment,
+    StringType,
+    Division,
+    Comma,
+    BracketLeft,
+    Else,
+    ElseIf,
+    End,
+    Write,
+    IntegerType,
+    FloatType,
+    Repeat,
+    Until,
+    Read,
+    IsNotEqual,
+    Error,
+    NumInt,
+    Id,
+    BracketRight,
+    EndOfFile,
+    BraceLeft,
+    BraceRight,
+    NumFloat,
+    If,
+    Then,
+    Plus,
+    Minus,
+    Mult,
+    SemiColon,
+    BoolOR,
+    BoolAnd,
+    Assign,
+    Return,
+    EndLine,
+    String,
+    Integer,
+    Float,
+    LessThan,
+    GreaterThan,
+    IsEqual
+}
+
+enum State
+{
+    intToFloat,
+    InAnd,
+    InOR,
+    Start,
+    Error,
+    Done,
+    InComment,
+    InSlash,
+    Int,
+    Float,
+    InNotEqual,
+    EndingComment,
+    Assignment,
+    String,
+    Identifier
+}
+

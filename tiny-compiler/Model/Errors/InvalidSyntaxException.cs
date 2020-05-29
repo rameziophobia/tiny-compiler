@@ -1,5 +1,6 @@
 ﻿namespace TinyCompiler.Model.Errors
 {
+
     class InvalidSyntaxException : CompilationExpection
     {
         public InvalidSyntaxException(Token token, TokenType expected) : base($"Line: {token.lineNum} Unexpected Token: {token.Lexeme}, Expected: {expected}")

@@ -52,7 +52,6 @@ namespace TinyCompiler.Controller
             current_token = new Token();
             lexeme = "";
             Tuple<string, string> errorExpectedFound = new Tuple<string, string>("", "");
-            //todo TokenType type = TokenType.EndOfFile;
             State current_state = State.Start;
             while (current_state != State.Done && current_state != State.Error)
             {

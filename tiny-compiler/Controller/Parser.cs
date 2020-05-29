@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TinyCompiler.Model;
 using TinyCompiler.Model.Errors;
 
@@ -30,11 +30,6 @@ namespace TinyCompiler.Controller
             return null;
         }
 
-        // change return type
-        public void getGraphData()
-        {
-
-        }
 
         private TreeNode getStmtSequence()
         {
@@ -77,7 +72,7 @@ namespace TinyCompiler.Controller
                     throw new InvalidSyntaxException(tokens[currentTokenIndex]);
             }
         }
-        private void match(TokenType expected) // todo rename
+        private void match(TokenType expected)
         {
             if (tokens[currentTokenIndex].Type != expected)
             {
@@ -104,6 +99,7 @@ namespace TinyCompiler.Controller
                 match(TokenType.Else);
                 currentTokenIndex++;
                 treeNode.Children.Add(getStmtSequence());
+                treeNode.Children[treeNode.Children.Count - 1].ExtraText += "<<else>>";
                 currentTokenIndex++;
             }
             match(TokenType.End);
@@ -198,7 +194,7 @@ namespace TinyCompiler.Controller
                 treeNode.Children.Add(tempNode);
                 currentTokenIndex++;
                 treeNode.Children.Add(getTerm());
-                tempNode = treeNode; // gamed
+                tempNode = treeNode;
             }
 
             return treeNode;
@@ -219,7 +215,7 @@ namespace TinyCompiler.Controller
                 treeNode.Children.Add(tempNode);
                 currentTokenIndex++;
                 treeNode.Children.Add(getFactor());
-                tempNode = treeNode; // gamed
+                tempNode = treeNode;
             }
 
             return treeNode;
